@@ -1,6 +1,9 @@
 #ence689e
 output.mat
 doc/
+*.pdf
+*.aux
+*.out
 
 # Windows default autosave extension
 *.asv
