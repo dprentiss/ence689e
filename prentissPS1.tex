@@ -2,34 +2,69 @@
 \documentclass[letterpaper]{tufte-handout}
 \usepackage{times}
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
 %\usepackage[left=1in]{geometry}
 
-\title{Problem Set 1 \\ ENCE689E Spring 2014}
+\newcommand{\R}{\mathcal{R}}
+\renewcommand{\arraystretch}{1.5}
+
+\title{Problem Set 1 --- ENCE689E Spring 2014}
 \author{David Prentiss}
 
 \begin{document}
 \maketitle
 
 
-\section{Hydrologic Modeling}
+\section{1. Hydrologic Modeling}
 \subsection{(a)}
 For each time $t$ and each geographic point $(x,y)$, the state variable $\mathbf{y}_t$ is defined as
 \[
-\begin{pmatrix}
-  \text{SWE} \\
-  T_{\text{snow}}
-\end{pmatrix}_{x,y}
+	\begin{pmatrix}
+		\text{SWE} \\
+		T_{\text{snow}}
+	\end{pmatrix}_{x,y}
 \]
 where $\text{SWE}$ is snow water equivalent and $T_{\text{snow}}$ is snowpack temperature.
 
-\section{Review of univariate PDFs}
-\begin{tabular}{l}
-  Distribution \\
-  \hline 
-  Normal Gaussian \\
-  Lognormal \\
-  Gamma \\
-  Beta \\
-  Exponential \\
+\section{2. Review of univariate PDFs}
+\begin{table*}
+	\begin{tabular}{rllll}
+	Distribution & PDF $f_X(x)$ & Support & Parameters & Notation \\
+	\midrule
+	Normal Gaussian
+	& $\frac{1}{\sqrt{2 \, \pi} \, \sigma} 
+	\exp \left[ -\frac{1}{2} \left( \frac{x - \mu}{\sigma} \right)^2 \right]$
+	& $x\in(-\infty,\infty)$
+	& $\mu \in (-\infty,\infty),\ \sigma>0$
+	& $X\sim\mathcal{N}(\mu,\sigma^2)$ \\
+	Lognormal 
+	& $\frac{1}{\sqrt{2 \, \pi} \, \sigma \, x}
+	\exp \left(-\frac{[\ln(x) - \mu]^2}{2 \, \sigma^2} \right)$
+	& $x\in(0,\infty)$
+	& $\mu \in (-\infty,\infty),\ \sigma>0$
+	& $X\sim\ln\mathcal{N}(\mu,\sigma^2)$ \\
+	Gamma \footnotemark
+	& $\frac{1}{\Gamma(k) \, b^k} x^{k-1} e^{-x/b}$ 
+	& $x\in(0,\infty)$
+	& $k,b\in(0,\infty)$
+	& $X\sim\Gamma(k,b)$ \\
+	Beta \footnotemark
+	& $\frac{1}{B(a, b)} x^{a-1} (1 - x)^{b-1}$
+	& $x\in[0,1]$
+	& $a,b\in(0,\infty)$ 
+	& $X\sim\text{Beta}(a,b)$ \\
+	Exponential
+	& $r \, e^{-r\,x}$
+	& $x\in[0,\infty)$
+	& $r\in(0,\infty)$
+	& $X\sim\text{Exp}(r)$
 \end{tabular}
+\end{table*}
+\vspace{1\baselineskip}
+\footnotetext[1]{where $\Gamma(k) = \int_0^\infty s^{k-1} e^{-s}\ ds$}
+\footnotetext{where $B(a, b) = \int_0^1 u^{a-1} (1 - u)^{b - 1}\ du$}
+%\vspace{-7\baselineskip}\footnotetext{test}
+
 \end{document}
