@@ -57,7 +57,7 @@ z0m=0.1*h;      % momentum roughness length (meters)
 z0h=0.1*z0m;    % scalar roughness length (meters)
 Csnow=0.55e+6;  % snow heat capacity (J/m^3/K)
 zm=2.;          % Ref.-level (meters)
-dispht=0.7*h;  % zero-plane disp. height (m)
+dispht=0.7*h;   % zero-plane disp. height (m)
 
 % Load time-varying forcing file (this is already setup for this simulation
 % period)
