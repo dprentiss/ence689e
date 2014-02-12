@@ -95,22 +95,27 @@ Figures \ref{swe} and \ref{tsnow} depict the SWE and snow temperature for the la
 \end{table}
 \begin{figure}
 	\includegraphics[width=\textwidth]{swe}
-	\caption{Snow Water Equivalent}
+        \caption{Snow Water Equivalent. At the end of the modeling period, SWE appears relatively uniform with some deviations at lower altitudes. This generalization is consistent with Fig. \ref{graph} in that the average is much closer to the ``high value'' time series.}
 	\label{swe}
 \end{figure}
 \begin{figure}
 	\includegraphics[width=\textwidth]{tsnow}
-	\caption{Snow Temperature}
+	\caption{Snow Temperature, red areas indicating higher values. The distribution of values for snowpack temperatures is consistent with two phenomena. Namely, it corresponds to both decreasing temperatures at higher altitudes and correlation with aspect. This can be seen by comparing snow temperature plot against the elevation and aspect plots.}
 	\label{tsnow}
 \end{figure}
 \subsection{(g)}
 \begin{figure}
 	\includegraphics[width=\textwidth]{graph}
-	\caption{High, low, and average SWE values over time.}
-
+	\caption{High, low, and average SWE values over time. While the sampling method is hardly rigorous, the similarity of the upper and average time series suggests the distribution is skewed toward the maximum. This observation is consistent with the plot of SWE values.}
+        \label{graph}
 \end{figure}
 
 \section{2. Review of Univariate PDFs}
+\begin{itemize}
+        \item Normal Distribution. The normal distribution is often chosen to model the results of many independent events such as measurement error. 
+        \item Log--normal Distribution. The log--normal distribution is useful for modeling skewed data, including many biological processes and measurements.
+        \item Beta Distribution. The beta distribution is useful for modeling unknown probabilities. In general the family of beta distributions is used to model random variables with finite bounds.
+\end{itemize}
 \begin{table*}[h]
 	\begin{tabular}{rllll}
 	Distribution & PDF $f_X(x)$ & Support & Parameters & Notation \\
