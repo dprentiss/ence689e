@@ -9,6 +9,7 @@
 
 \newcommand{\R}{\mathcal{R}}
 \newcommand{\E}{\text{E}}
+\newcommand{\p}{p_{XY}}
 \renewcommand{\arraystretch}{1.5}
 
 \title{Problem Set 2 --- ENCE689E Spring 2014}
@@ -20,9 +21,89 @@
 
 \section{1. Pairs of Random Variables: Joint PDFs}
 \[
-\frac{6}{5: (\frac{6\, x}{5}
+        p_{XY} = \frac{6}{5}(x+y^2)
+\]
+\subsection{(a)} The marginal densities are given as
+\[
+        p_X = \int_y \p\ dy = \int_0^1 \frac{6}{5}(x+y^2)\ dy = \frac{6}{5}(xy+\frac{y^3}{3})\bigg|_0^1
+        = \frac{6}{5}(x+\frac{1}{3})
+\]
+\[
+        p_Y = \int_x \p\ dx = \int_0^1 \frac{6}{5}(x+y^2)\ dx = \frac{6}{5}(\frac{x^2}{2}+xy^2)\bigg|_0^1
+        = \frac{6}{5}(y^2+\frac{1}{2})
+\]
+The variables are \emph{not} independent since
+\[
+        p_X\cdot p_Y = \frac{1}{25}\left(36xy^2+18x+12y^2+6\right)\neq \frac{6}{5}(x+y^2) \implies
+        p_X\cdot p_Y \neq \p
+\]
+\subsection{(b)}
+\[
+        p_{Y|X}(y|x) = \frac{\p}{p_X}=\frac{x+y^2}{x+\frac{1}{3}}
+\]
+\[
+        p_{X|Y}(x|y) = \frac{\p}{p_Y}=\frac{x+y^2}{y^2+\frac{1}{2}}
+\]
+\subsection{(c)}
+\[
+        \E X= \int_0^1\int_0^1 x\p\ dx\ dy
+        = \int_0^1 xp_X\ dx
+        = \int_0^1 \frac{6}{5}(x^2+\frac{x}{3})\ dx
+        = \frac{3}{5} \approx 0.6
+\]
+\[
+        \E Y= \int_0^1\int_0^1 x\p\ dx\ dy
+        = \int_0^1 yp_Y\ dy
+        = \int_0^1 \frac{6}{5}(y^3+\frac{y}{2})\ dy
+        = \frac{1}{2} = 0.5
+\]
+\subsection{(d)}
+The correlation coefficient
+\[
+        E[XY] = \int_0^1\int_0^1 xy\p\ dx\ dy
+        = \int_0^1\int_0^1 \frac{6}{5}(x^2y + xy^3)\ dx\ dy
+        = \int_0^1\frac{1}{5}(2y + 3y^3)\ dy
+        = \frac{7}{20} \approx 0.35
+\]
+\subsection{(e)}
+\[
+        \Pr(x> 0.5|y=0.5)
+        = 1 - \Pr(x\leq 0.5|y=0.5)
+        = 1 - \int_0^{0.5} p_{X|Y}(x|y=0.5)\ dx
+        = 1 - \int_0^{0.5} \frac{1}{3}(4x+1)\ dx
+        = 1 - \frac{1}{3} \approx 0.66
+\]
+\subsection{(f)}
+\[
+        \E[Y|x=0.25]
+        = \int_0^1 yp_{Y|X}(y|x = 0.25)\ dy
+        = \int_0^1 y\frac{\frac{1}{4}+y^2}{\frac{1}{4}+\frac{1}{3}}\ dy
+        = \frac{9}{14} \approx 0.64
 \]
 \section{2. Linear Algebra Review}
 \section{3. Gaussian Random Vectors and Evolving PDFs}
+\subsection{(a)}
+The standard deviations are the square roots of the diagonal of $Cyy$. They are 3 and 5 for $y_{1t}$ and $y_{2t}$ respectively.
+\subsection{(b)}
+\[
+        \rho_{yy} = \frac{10}{3\cdot5} = \frac{2}{3}
+\]
+\subsection{(c)}
+\begin{figure*}[h!]
+        \includegraphics[width=\textwidth]{ps2plot}
+\end{figure*}
+\subsection{(d)}
+Since the $y_t$ and $u_t$ are Guassian and $y_{t+1}$ is a linear transformation, $y_{t+1}$ is also Gaussian.
+\subsection{(e)}
+From the lecture notes, the mean vector of $y_{t+1}$ is
+\[A\bar y_t + G\bar u_t + b
+\]
+\subsection{(f)}
+From the lecture notes, the covariance matrix of $y_{t+1}$ is
+\[AC_{yy}A^T + GC_{uu}G^T
+\]
+\subsection{(g)}
+The mean, covariance and standard deviations of $y_{t+1}$ are, respectively
+\subsection{(h)}
 
 \end{document}

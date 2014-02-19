@@ -8,7 +8,7 @@ Cuu = [2 0; 0 1];
 b = [0.50; 0.75];
 yt1 = A*yt + G*u + b;
 Cyy1 = A*Cyy*A' + G*Cuu*G';
-plot_bivar_norm(yt1,Cyy1);
+plot_bivar_norm(yt1,Cyy1);    % plot yt1
 sd1 = sqrt(Cyy1(1,1));        % standard deviation yt1
 sd2 = sqrt(Cyy1(2,2));        % standard deviation yt2
 rho1 = Cyy1(1,2)/(sd1 * sd2); % correlation coefficient
