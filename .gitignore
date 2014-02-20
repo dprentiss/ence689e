@@ -4,6 +4,7 @@ doc/
 *.pdf
 *.aux
 *.out
+*.gz
 
 # Windows default autosave extension
 *.asv
