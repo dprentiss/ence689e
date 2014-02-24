@@ -23,60 +23,58 @@
 \section{1. Monte Carlo Methods}
 \subsection{(a)}
 \begin{figure}
-    \includegraphics[width=\textwidth]{problem1a}
-    \caption{Plot of $p_X(x)=e^{-x}$}
-    \label{exprnd}
+        \includegraphics[width=\textwidth]{problem1a}
+        \caption{Plot of $p_X(x)=e^{-x}$}
+        \label{exprnd}
 \end{figure}
 
 \subsection{(b)}
-    \[
-    P_X(x) = \int_{-\infty}^x p_X dx
-     = 0 + \int_0^x p_X dx = 1 - e^{-x}
-    \]
+\[
+        P_X(x) = \int_{-\infty}^x p_X dx
+        = 0 + \int_0^x p_X dx = 1 - e^{-x}
+\]
 
 \[
-P^{-1}_X = -\ln(1-P_X(x))
+        P^{-1}_X = -\ln(1-P_X(x))
 \]
-\subsection{(c), (d)}
-See Figures \ref{rand} and \ref{exprnd} and Listing \ref{lst1}. \\
+\subsection{(c), (d) and (e)}
+See Figures \ref{rand} and \ref{exprnd} and Listing \ref{lst1}. The sample mean and variance (as listed in the figures) of the ensemble generated with the built-in function {\ttfamily exprnd} is superior to that of the inverse CDF method in that the former is closer to the theoretical values. However, this comparison does not provide useful information about the methods as it does not control for the possibility that the built-in function performed better only in this particular realization of $n=1000$ ensembles. Larger values of $n$ or more ensembles would provide more information.\\
 \begin{figure}
-    \includegraphics[width=\textwidth]{problem1}
-    \caption{Ensebles generated with the inverse cumulative distribution function.
-    For the ensemble with $n=1000$ the sample mean and variance are $0.9882$ and $0.9590$ respectively.}
-    \label{rand}
+        \includegraphics[width=\textwidth]{problem1}
+        \caption{Ensembles generated with the inverse cumulative distribution function.
+        For the ensemble with $n=1000$ the sample mean and variance are $0.9882$ and $0.9590$ respectively.}
+        \label{rand}
 \end{figure}
 \begin{figure}
-    \includegraphics[width=\textwidth]{problem1e}
-    \caption{Ensebles generated with the MATLAB {\ttfamily exprnd} function.
-    For the ensemble with $n=1000$ the sample mean and variance are $0.9904$ and $1.0043$ respectively.}
-    \label{exprnd}
+        \includegraphics[width=\textwidth]{problem1e}
+        \caption{Ensebles generated with the MATLAB {\ttfamily exprnd} function.
+        For the ensemble with $n=1000$ the sample mean and variance are $0.9904$ and $1.0043$ respectively.}
+        \label{exprnd}
 \end{figure}
 \small
 \begin{minipage}{\linewidth}
-\lstinputlisting[language=Matlab, caption={Monte Carlo estimation of $e^{-x}$ in MATLAB},
- basicstyle=\ttfamily, label=lst1]{ps3problem1.m}
+        \lstinputlisting[language=Matlab, caption={Monte Carlo estimation of $e^{-x}$ in MATLAB},
+        basicstyle=\ttfamily, label=lst1]{ps3problem1.m}
 \end{minipage}
-\subsection{(e)}
 
 \section{2. Monte Carlo Methods}
-\subsection{(a)}
-\subsection{(b)}
-\subsection{(c)}
+\subsection{(a), (b) and (c)}
+See Figures \ref{norm} and \ref{lognorm} and Listing \ref{lst2}.
 \begin{figure}
-
-    \includegraphics[width=\textwidth]{problem2}
-    \caption{Ensebles generated with the matlab {\ttfamily exprnd} function}
-    \label{norm}
+        \includegraphics[width=\textwidth]{problem2}
+        \caption{Ensebles generated with the matlab {\ttfamily exprnd} function}
+        \label{norm}
 \end{figure}
 \subsection{(d)}
 \begin{minipage}{\linewidth}
-\lstinputlisting[language=Matlab, basicstyle=\ttfamily]{ps3problem2.m}
+        \lstinputlisting[language=Matlab, caption={Monte Carlo estimation of $\mathcal{F}(x)$},
+        basicstyle=\ttfamily, label=lst2]{ps3problem2.m}
 \end{minipage}
 \subsection{(e)}
 \begin{figure}
-    \includegraphics[width=\textwidth]{problem2e}
-    \caption{Ensebles generated with the MATLAB {\ttfamily exprnd} function}
-    \label{lognorm}
+        \includegraphics[width=\textwidth]{problem2e}
+        \caption{Ensebles generated with the MATLAB {\ttfamily exprnd} function}
+        \label{lognorm}
 \end{figure}
 
 \end{document}
