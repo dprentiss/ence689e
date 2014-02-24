@@ -5,6 +5,8 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage{listings}
+\usepackage{epstopdf}
 %\usepackage[left=1in]{geometry}
 
 \newcommand{\R}{\mathcal{R}}
@@ -19,69 +21,62 @@
 \maketitle
 
 \section{1. Monte Carlo Methods}
-\subsection{(a), (b)}
-\newpage
+\subsection{(a)}
+\begin{figure}
+    \includegraphics[width=\textwidth]{problem1a}
+    \caption{Plot of $p_X(x)=e^{-x}$}
+    \label{exprnd}
+\end{figure}
+
+\subsection{(b)}
+    \[
+    P_X(x) = \int_{-\infty}^x p_X dx
+     = 0 + \int_0^x p_X dx = 1 - e^{-x}
+    \]
+
+\[
+P^{-1}_X = -\ln(1-P_X(x))
+\]
 \subsection{(c), (d)}
-See Figure \ref{rand} and the following code:
+See Figures \ref{rand} and \ref{exprnd} and Listing \ref{lst1}. \\
+\begin{figure}
+    \includegraphics[width=\textwidth]{problem1}
+    \caption{Ensebles generated with the inverse cumulative distribution function.
+    For the ensemble with $n=1000$ the sample mean and variance are $0.9882$ and $0.9590$ respectively.}
+    \label{rand}
+\end{figure}
+\begin{figure}
+    \includegraphics[width=\textwidth]{problem1e}
+    \caption{Ensebles generated with the MATLAB {\ttfamily exprnd} function.
+    For the ensemble with $n=1000$ the sample mean and variance are $0.9904$ and $1.0043$ respectively.}
+    \label{exprnd}
+\end{figure}
 \small
-\begin{verbatim}
-syms x;
-pdf = sym(exp(-x));    % define exponential density function
-cdf = int(pdf, 0, x);  % integrate pdf to find cdf
-F = finverse(cdf);     % calculate inverse of cdf
-rng(1);                % set random seed for reproducible results
-
-plotNum = 0;
-% calculate and plot ensembles generated with rand
-for n = [10 100 1000 10000]
-    bins = 0:0.1:10;
-    r = rand(n, 1);                % generate random probabilties
-    mc = subs(F, 'x', r);          % calculate z values
-    [count, loc] = hist(mc, bins);
-    
-    % plot figure 1
-    figure(1)
-    plotNum = plotNum + 1;
-    subplot(2, 2, plotNum)
-    bar(loc, count/n*10, 'EdgeColor', 'none', 'BarWidth', 1); hold on;
-    d = 0:0.01:6;
-    plot(d, exp(-d));
-    axis([0, 6, 0, 1]);
-    title(['exp(-x), n=', num2str(n)]);
-    set(findall(gcf,'type','text'),'fontSize',18);
-    set(gca,'fontSize',18);
-end
-
-plotNum = 0;
-% calculate and plot ensembles generated with exprnd
-for n = [10 100 1000 10000]
-    bins = 0:0.1:10;
-    r = exprnd(1, n, 1);           % generate random probabilties
-    mc = subs(F, 'x', r);          % calculate z values
-    [count, loc] = hist(mc, bins);
-    
-    % plot figure 2
-    figure(2)
-    plotNum = plotNum + 1;
-    subplot(2, 2, plotNum)
-    bar(loc, count/n*10, 'EdgeColor', 'none', 'BarWidth', 1); hold on;
-    d = 0:0.01:6;
-    plot(d, exp(-d));
-    axis([0, 6, 0, 1]);
-    title(['exp(-x), n=', num2str(n)]);
-    set(findall(gcf,'type','text'),'fontSize',18);
-    set(gca,'fontSize',18);
-\end{verbatim}
+\begin{minipage}{\linewidth}
+\lstinputlisting[language=Matlab, caption={Monte Carlo estimation of $e^{-x}$ in MATLAB},
+ basicstyle=\ttfamily, label=lst1]{ps3problem1.m}
+\end{minipage}
 \subsection{(e)}
 
-\begin{figure*}
-    \includegraphics[width=0.8\textwidth]{problem1}
-    \caption{Ensebles generated with the inverse cumulative distribution function}
-    \label{rand}
-\end{figure*}
-\begin{figure*}
-    \includegraphics[width=0.8\textwidth]{problem1e}
+\section{2. Monte Carlo Methods}
+\subsection{(a)}
+\subsection{(b)}
+\subsection{(c)}
+\begin{figure}
+
+    \includegraphics[width=\textwidth]{problem2}
+    \caption{Ensebles generated with the matlab {\ttfamily exprnd} function}
+    \label{norm}
+\end{figure}
+\subsection{(d)}
+\begin{minipage}{\linewidth}
+\lstinputlisting[language=Matlab, basicstyle=\ttfamily]{ps3problem2.m}
+\end{minipage}
+\subsection{(e)}
+\begin{figure}
+    \includegraphics[width=\textwidth]{problem2e}
     \caption{Ensebles generated with the MATLAB {\ttfamily exprnd} function}
-    \label{exprnd}
-\end{figure*}
+    \label{lognorm}
+\end{figure}
+
 \end{document}
