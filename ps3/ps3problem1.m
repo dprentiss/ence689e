@@ -8,8 +8,8 @@ plotNum = 0;
 % calculate and plot ensembles generated with rand
 for n = [10 100 1000 10000]
     bins = 0:0.1:10;
-    r = rand(n, 1);                % generate random probabilties
-    mc = subs(F, 'x', r);          % calculate z values
+    r = rand(n, 1);                 % generate random probabilties
+    mc = double(subs(F, 'x', r));   % calculate z values
     [count, loc] = hist(mc, bins);
     
     % plot figure 1
@@ -29,8 +29,8 @@ plotNum = 0;
 % calculate and plot ensembles generated with exprnd
 for n = [10 100 1000 10000]
     bins = 0:0.1:10;
-    r = exprnd(1, n, 1);              % generate random probabilties
-    mc = subs(F, 'x', r);          % calculate z values
+    r = exprnd(1, n, 1);            % generate random probabilties
+    mc = double(subs(F, 'x', r));   % calculate z values
     [count, loc] = hist(mc, bins);
     
     % plot figure 2
