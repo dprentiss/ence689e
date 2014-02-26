@@ -35,45 +35,65 @@
 \]
 
 \[
-        P^{-1}_X = -\ln(1-P_X(x))
+        P^{-1}_X = -\ln(1-P_X) \text{ for } 0 \leq P_X \leq 1
 \]
 \subsection{(c), (d) and (e)}
-See Figures \ref{rand} and \ref{exprnd} and Listing \ref{lst1}. The sample mean and variance (as listed in the figures) of the ensemble generated with the built-in function {\ttfamily exprnd} is superior to that of the inverse CDF method in that the former is closer to the theoretical values. However, this comparison does not provide useful information about the methods as it does not control for the possibility that the built-in function performed better only in this particular realization of $n=1000$ ensembles. Larger values of $n$ or more ensembles would provide more information.\\
+See Figures \ref{rand} and \ref{exprnd} and Listing \ref{lst1}. The sample mean and variance (as listed in the figures) of the ensemble generated with the built-in function {\ttfamily exprnd} is superior to that of the inverse CDF method in that the former is closer to the theoretical values. However, this comparison does not provide useful information about the methods as it does not control for the possibility that the built-in function performed better only in this particular realization of $n=10000$ ensembles. Larger values of $n$ or more ensembles would provide more information.\\
 \begin{figure}
         \includegraphics[width=\textwidth]{problem1}
         \caption{Ensembles generated with the inverse cumulative distribution function.
-        For the ensemble with $n=1000$ the sample mean and variance are $0.9882$ and $0.9590$ respectively.}
+        For the ensemble with $n=10000$, the sample mean and variance are $0.9882$ and $0.9590$ respectively.}
         \label{rand}
 \end{figure}
 \begin{figure}
         \includegraphics[width=\textwidth]{problem1e}
         \caption{Ensebles generated with the MATLAB {\ttfamily exprnd} function.
-        For the ensemble with $n=1000$ the sample mean and variance are $0.9904$ and $1.0043$ respectively.}
+        For the ensemble with $n=10000$, the sample mean and variance are $0.9904$ and $1.0043$ respectively.}
         \label{exprnd}
 \end{figure}
-\small
+{\small
 \begin{minipage}{\linewidth}
         \lstinputlisting[language=Matlab, caption={Monte Carlo estimation of $e^{-x}$ in MATLAB},
         basicstyle=\ttfamily, label=lst1]{ps3problem1.m}
 \end{minipage}
+}
 
 \section{2. Monte Carlo Methods}
 \subsection{(a), (b) and (c)}
-See Figures \ref{norm} and \ref{lognorm} and Listing \ref{lst2}.
+See Figure \ref{norm} and Listing \ref{lst2}. The mean vector and covariance matrix for the normally distributed vector $w$ are
+\[
+m_w=\begin{bmatrix} -0.0431 \\ 0.6628  \end{bmatrix},
+\quad C_{ww} = \begin{bmatrix} 0.0862 & 0 \\ 0 & 0.0606 \end{bmatrix}
+\]
+For an ensemble with $n=1000$ of $x$, the sample mean and sample variance were
+\[
+\bar{x}=\begin{bmatrix} 0.9960 \\ 2.0462  \end{bmatrix},
+\quad Q_{xx} = \begin{bmatrix} 0.0905 & 0.0055 \\ 0.0055 & 0.2894 \end{bmatrix}
+\]
+These results, including the non-zero correlations, are consistent with the sample size. We would expect to see the mean, variance approaching the theoretical and the correlation approaching zero for large values of $n$. In that case, if the correlations did not approach zero, this would tell us something about the distribution of the nominally random sampler in question, {\ttfamily mvnrnd}.
 \begin{figure}
         \includegraphics[width=\textwidth]{problem2}
-        \caption{Ensebles generated with the matlab {\ttfamily exprnd} function}
+        \caption{Random Variable $x$.  }
         \label{norm}
 \end{figure}
-\subsection{(d)}
+{\small
 \begin{minipage}{\linewidth}
-        \lstinputlisting[language=Matlab, caption={Monte Carlo estimation of $\mathcal{F}(x)$},
+        \lstinputlisting[language=Matlab, caption={Monte Carlo estimation of $\mathcal{F}(x)$ in MATLAB},
         basicstyle=\ttfamily, label=lst2]{ps3problem2.m}
 \end{minipage}
-\subsection{(e)}
+}
+\subsection{(d), (e)}
+See Figure \ref{lognorm}. 
+For an ensemble with $n=1000$ of $y$, the sample mean and sample variance were
+\[
+\bar{y}=\begin{bmatrix} 0.8014 \\ 0.6057 \end{bmatrix},
+\quad Q_{yy} = \begin{bmatrix} 0.0644 & -0.0542 \\ -0.0542 & 0.0699 \end{bmatrix}
+\]
+
 \begin{figure}
         \includegraphics[width=\textwidth]{problem2e}
-        \caption{Ensebles generated with the MATLAB {\ttfamily exprnd} function}
+        \caption{Random variable $\mathcal{F}(x)$.
+        The elements are correlated as indicated by the coefficient of -0.8078. Because it is the sum of exponentially distributed random variables, $\mathcal{F}(x)$ is gamma distributed.}
         \label{lognorm}
 \end{figure}
 
