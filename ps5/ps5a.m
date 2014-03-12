@@ -45,6 +45,9 @@ for i = 1:10
     y_E(:,:,i+1) = A*y_E(:,:,i) + repmat(G*u(i),1,1000);
 end
 
+y_E_mean = mean(y_E(:,:,1),2)
+y_E_covar = cov(y_E(:,:,1)')
+
 % plot(T, y_true(1,:), '-k', T, y_true(2,:), '-k')
 % hold on;
 % for i = 1:100:1000
