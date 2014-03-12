@@ -16,16 +16,21 @@ end
 plot(T, y_true(1,:), '-sk', T, y_true(2,:), '-ok', ...
     T, y_b(1,:), ':sk', T, y_b(2,:), ':ok')
 
-y1bias = fct_bias(y_b(1,:),y_true(1,:))
-y2bias = fct_bias(y_b(2,:),y_true(2,:))
-y1RMSE = fct_RMSE(y_b(1,:),y_true(1,:))
-y2RMSE = fct_RMSE(y_b(2,:),y_true(2,:))
+y1biasb = fct_bias(y_b(1,:),y_true(1,:))
+y2biasb = fct_bias(y_b(2,:),y_true(2,:))
+y1RMSEb = fct_RMSE(y_b(1,:),y_true(1,:))
+y2RMSEb = fct_RMSE(y_b(2,:),y_true(2,:))
 
 Cyy_c(:,:,1) = [400, 0; 0, 400];
 
 for i = 1:10
     Cyy_c(:,:,i+1) = A*Cyy_c(:,:,i)*A';
 end
+
+y1biasc = fct_bias(y_b(1,:),y_true(1,:))
+y2biasc = fct_bias(y_b(2,:),y_true(2,:))
+y1RMSEc = fct_RMSE(y_b(1,:),y_true(1,:))
+y2RMSEc = fct_RMSE(y_b(2,:),y_true(2,:))
 
 yb1_up = y_b(1,:)' + 2*sqrt(squeeze(Cyy_c(1,1,:)));
 yb1_lw = y_b(1,:)' - 2*sqrt(squeeze(Cyy_c(1,1,:)));
