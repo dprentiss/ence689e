@@ -45,8 +45,9 @@ for i = 1:10
     y_E(:,:,i+1) = A*y_E(:,:,i) + repmat(G*u(i),1,1000);
 end
 
-plot(T, y_true(1,:), '-k', T, y_true(2,:), '-k')
-hold on;
-for i = 1:10:1000
-     plot(T, squeeze(y_E(1,i,:)), ':k', T, squeeze(y_E(2,i,:)), ':k')
-end
+% plot(T, y_true(1,:), '-k', T, y_true(2,:), '-k')
+% hold on;
+% for i = 1:100:1000
+%      plot(T, squeeze(y_E(1,i,:)), ':k', T, squeeze(y_E(2,i,:)), ':k')
+% end
+
