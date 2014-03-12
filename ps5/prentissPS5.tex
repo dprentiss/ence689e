@@ -2,16 +2,19 @@
 \documentclass[fleqn, letterpaper]{tufte-handout}
 \usepackage{times}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{listings}
 \usepackage{epstopdf}
+\usepackage{bm}
 %\usepackage[left=1in]{geometry}
 
 \newcommand{\R}{\mathcal{R}}
 \newcommand{\E}{\text{E}}
 \newcommand{\p}{p_{XY}}
+\newcommand{\T}{^\text{T}}
 \renewcommand{\arraystretch}{1.5}
 
 \title{Problem Set 4 --- ENCE689E Spring 2014}
@@ -21,26 +24,44 @@
 \maketitle
 
 \section{Time-varying (Dynamic) Model}
+
 \subsection{(a)}
-\subsection{(a)}
-\subsection{(a)}
-\subsection{(a)}
-\subsection{(a)}
-\subsection{(a)}
-\[z = \alpha_1x_1^2+\alpha_2x_2^2 = Ax\]
-where 
+
+{\small
+\begin{minipage}{\linewidth}
+        \lstinputlisting[language=Matlab, caption={Propagation of a linear soil moisture model},
+        basicstyle=\ttfamily, label=lst1]{ps5a.m}
+\end{minipage}
+}
+
+\subsection{(b)}
+
 \begin{figure}
         \includegraphics[width=\textwidth]{ps5figb}
         \caption{Plot of $p_X(x)=e^{-x}$}
         \label{exprnd}
 \end{figure}
 
-{\small
-\begin{minipage}{\linewidth}
-        \lstinputlisting[language=Matlab, caption={Monte Carlo estimation of $e^{-x}$ in MATLAB},
-        basicstyle=\ttfamily, label=lst1]{ps5a.m}
-\end{minipage}
-}
+\subsection{(c)}
+
+\[
+\bar{\mathbf{y}}_{t+1} = \mathbf{A}\bar{\mathbf{y}}_t + \mathbf{G}\bar{u}_t
+\]
+\[
+\mathbf{C}_{\mathbf{yy}}^{(t+1)} = \mathbf{AC}_{\mathbf{yy}}^{(t)}\mathbf{A}^\intercal + \mathbf{GC}_\mathbf{{uu}}^{(t)}\mathbf{G}^\intercal
+\]
+
+\subsection{(d)}
+
+\subsection{(e)}
+
+Because measurements of moisture are bound below at zero, a Gaussian distribution may not be the best to model the uncertainty of initial conditions. A disribution with a lower bound on its support would be more appropriate. Furthermore, since the probability of moistures close to zero should be decresing in the limit as the moisture approaches zero, a gamma distribution may be more appropriate.
+
+\subsection{(f)}
+
+As with the uncertainty in the initial conditions, the precipitation forcing is bound below at zero. An exponential disribution may be better. 
+
+\subsection{(g)}
 
 
 \end{document}
