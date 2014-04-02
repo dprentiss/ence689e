@@ -16,7 +16,21 @@
 \newcommand{\E}{\text{E}}
 \newcommand{\p}{p_{XY}}
 \newcommand{\T}{^\text{T}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\HH}{\mathbf{H}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\GG}{\mathbf{G}}
+\newcommand{\vecv}{\mathbf{v}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\cyy}{\mathbf{C}_{yy}}
+\newcommand{\cuu}{\mathbf{C}_{uu}}
+\newcommand{\cvv}{\mathbf{C}_{vv}}
+\newcommand{\cpp}{\mathbf{C}_{\psi\psi}}
 \renewcommand{\arraystretch}{1.5}
+\newcommand{\KK}{\left(\begin{array}{c} \frac{{\sigma_{\y_1}}^2}{{\mathrm{sv}}^2 + {\sigma_{\y_1}}^2}\\ \frac{\sigma_{\y_1\y_2}}{{\mathrm{sv}}^2 + {\sigma_{\y_1}}^2} \end{array}\right)}
+\newcommand{\cyylong}{\left(\begin{array}{cc} {\mathrm{sy1}}^2 & \sigma_{\y_1\y_2}\\ \sigma_{\y_1\y_2} & {\mathrm{sy2}}^2 \end{array}\right)}
 
 \title{Problem Set 6 --- ENCE689E Spring 2014}
 \author{David Prentiss}
@@ -26,6 +40,30 @@
 
 \section{1. Kalman Filter}
 \subsection{(a)}
+\subsection{(b)}
+\subsection{(c)}
+\begin{align*}
+\y &= \left(\begin{array}{c} \Delta t\, \left(\psi_1+ \uu_1\right) + \Delta t\, y_1\, \left(\phi_1 + 1\right) + \Delta t\, \phi_2 y_2\\ \Delta t\, \left(\psi_2 + \uu_2\right) + \Delta t\, y_2\, \left(\phi_4 + 1\right) + \Delta t\, \phi_3\, y_1 \end{array}\right) \\ \\
+\cyy &= \A\cyy\A\T + \GG\cuu\GG\T + \GG\cpp\GG\T
+\end{align*}
+\subsection{(d)}
+\begin{align*}
+K &= \cyy \HH\T(\HH\cyy\HH\T+\cvv)^{-1} \\
+&= \KK\\ \\
+\y^+ &= \y^- + K(\z-\HH\y^-) \\
+&= \y^- + \cyy \HH\T(\HH\cyy\HH\T+\cvv)^{-1}(\z-\HH\y^-) \\ 
+&= \left(\begin{array}{c} \mathrm{y1} + \frac{{\mathrm{sy1}}^2\, \left(z - \mathrm{y1}\right)}{{\mathrm{sv}}^2 + {\mathrm{sy1}}^2}\\ \mathrm{y2} + \frac{\sigma_{y_1y_2}\, \left(z - \mathrm{y2}\right)}{{\mathrm{sv}}^2 + {\mathrm{sy1}}^2} \end{array}\right)\\ \\
+\cyy^+  &= \left(\I - K\HH\right)\cyy\\
+&= \left[\left(\begin{array}{cc} 1 & 0\\ 0 & 1 \end{array}\right) - \KK (1\quad 0)\right]\cyylong\\
+&= \left[\begin{array}{cc}
+ {\sigma_{\y_1}}^2\, \left(1 -\frac{{\sigma_{\y_1}}^2}{{\sigma_\vecv}^2 + {\sigma_{\y_1}}^2}\right) 
+ &  \sigma_{\y_1\y_2}\, \left(1-\frac{{\sigma_{\y_1}}^2}{{\sigma_\vecv}^2 + {\sigma_{\y_1}}^2}\right)\\
+  \sigma_{\y_1\y_2} - \frac{{\sigma_{\y_1}}^2\, \sigma_{\y_1\y_2}}{{\sigma_\vecv}^2 + {\sigma_{\y_1}}^2} 
+  & {\sigma_{\y_2}}^2 - \frac{{\sigma_{\y_1\y_2}}^2}{{\sigma_\vecv}^2 + {\sigma_{\y_1}}^2} \end{array}\right]
+\end{align*}
+\subsection{(e)}
+\subsection{(f)}
+\subsection{(g)}
 
 \section{2. Kalman Filter}
 
