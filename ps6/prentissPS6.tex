@@ -41,8 +41,24 @@
 
 \section{1. Kalman Filter}
 \subsection{(a)}
+\begin{align*}
+        \frac{dy}{dt} &= \phi y_t + \psi + u(t) \\
+        \frac{y_{t+1}-y_t}{\Delta t} &= \phi y_t + \psi + u(t) \\
+        \frac{y_{t+1}}{\Delta t} &= \phi y_t + \psi + u(t) + y_t\\
+                                 &= \begin{pmatrix} \phi_1+1 & \phi_2 \\ \phi_3 &\phi_4+1\end{pmatrix} y_t + \psi + u(t)\\
+        y_{t+1} &= Ay_t + b\psi + cu(t),
+\end{align*}
+where $A = \begin{pmatrix} \phi_1+1 & \phi_2 \\ \phi_3 &\phi_4+1\end{pmatrix}\text{ and } b = c = \Delta t
+$.
+
 \subsection{(b)}
+\[z = Hy + v\]
+where $ H = (1\quad 0)\T $ and $v\sim\mathcal{N}(\bar{v},\ C_{vv})$
+
 \subsection{(c)}
+\begin{align*}
+\end{align*}
+
 \begin{align*}
 \y &= \left(\begin{array}{c} \Delta t\, \left(\psi_1+ \uu_1\right) + \Delta t\, y_1\, \left(\phi_1 + 1\right) + \Delta t\, \phi_2 y_2\\ \Delta t\, \left(\psi_2 + \uu_2\right) + \Delta t\, y_2\, \left(\phi_4 + 1\right) + \Delta t\, \phi_3\, y_1 \end{array}\right) \\ \\
 \cyy &= \A\cyy\A\T + \GG\cuu\GG\T + \GG\cpp\GG\T
@@ -65,25 +81,6 @@ K &= \cyy \HH\T(\HH\cyy\HH\T+\cvv)^{-1} \\
 \subsection{(e)}
 \subsection{(f)}
 \subsection{(g)}
-\begin{align*}
-        \frac{dy}{dt} &= \phi y_t + \psi + u(t) \\
-        \frac{y_{t+1}-y_t}{\Delta t} &= \phi y_t + \psi + u(t) \\
-        \frac{y_{t+1}}{\Delta t} &= \phi y_t + \psi + u(t) + y_t\\
-                                 &= \begin{pmatrix} \phi_1+1 & \phi_2 \\ \phi_3 &\phi_4+1\end{pmatrix} y_t + \psi + u(t)\\
-        y_{t+1} &= Ay_t + b\psi + cu(t),
-\end{align*}
-where $A = \begin{pmatrix} \phi_1+1 & \phi_2 \\ \phi_3 &\phi_4+1\end{pmatrix}\text{ and } b = c = \Delta t
-$.
-
-\subsection{(b)}
-\[z = Hy + v\]
-
-\subsection{(c)}
-\begin{align*}
-        \bar{y}_{t+1}
-\end{align*}
-where $ H = (1\quad 0)\T $ and $v\sim\mathcal{N}(\bar{v},\ C_{vv})$
-
 \section{2. Kalman Filter}
 
 {\scriptsize
