@@ -31,6 +31,7 @@
 \renewcommand{\arraystretch}{1.5}
 \newcommand{\KK}{\left(\begin{array}{c} \frac{{\sigma_{\y_1}}^2}{{\mathrm{sv}}^2 + {\sigma_{\y_1}}^2}\\ \frac{\sigma_{\y_1\y_2}}{{\mathrm{sv}}^2 + {\sigma_{\y_1}}^2} \end{array}\right)}
 \newcommand{\cyylong}{\left(\begin{array}{cc} {\mathrm{sy1}}^2 & \sigma_{\y_1\y_2}\\ \sigma_{\y_1\y_2} & {\mathrm{sy2}}^2 \end{array}\right)}
+\renewcommand{\vec}[1]{\mathrm{#1}}
 
 \title{Problem Set 6 --- ENCE689E Spring 2014}
 \author{David Prentiss}
@@ -64,6 +65,24 @@ K &= \cyy \HH\T(\HH\cyy\HH\T+\cvv)^{-1} \\
 \subsection{(e)}
 \subsection{(f)}
 \subsection{(g)}
+\begin{align*}
+        \frac{dy}{dt} &= \phi y_t + \psi + u(t) \\
+        \frac{y_{t+1}-y_t}{\Delta t} &= \phi y_t + \psi + u(t) \\
+        \frac{y_{t+1}}{\Delta t} &= \phi y_t + \psi + u(t) + y_t\\
+                                 &= \begin{pmatrix} \phi_1+1 & \phi_2 \\ \phi_3 &\phi_4+1\end{pmatrix} y_t + \psi + u(t)\\
+        y_{t+1} &= Ay_t + b\psi + cu(t),
+\end{align*}
+where $A = \begin{pmatrix} \phi_1+1 & \phi_2 \\ \phi_3 &\phi_4+1\end{pmatrix}\text{ and } b = c = \Delta t
+$.
+
+\subsection{(b)}
+\[z = Hy + v\]
+
+\subsection{(c)}
+\begin{align*}
+        \bar{y}_{t+1}
+\end{align*}
+where $ H = (1\quad 0)\T $ and $v\sim\mathcal{N}(\bar{v},\ C_{vv})$
 
 \section{2. Kalman Filter}
 
