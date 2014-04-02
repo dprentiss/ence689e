@@ -20,5 +20,19 @@ for rho = -1:0.01:1
     j = j + 1;
     u = utrue*rho + noise;
     u = [0 u];
-    rohs(j,:) = [rho, fct_bias(utrue, u(1:end-1)), fct_RMSE(utrue, u(1:end-1))]
+    rhos(j,:) = [rho, fct_bias(utrue, u(1:end-1)), fct_RMSE(utrue, u(1:end-1))]
 end
+
+figure
+hold on
+plot(ttrue,ytrue(1,:))
+plot(ttrue,squeeze(ybar_FULL(1,:)))
+plot(ttrue, 2*sqrt(squeeze(Cyy_FULL(1,1,:))))
+plot(ttrue, -2*sqrt(squeeze(Cyy_FULL(1,1,:))))
+
+figure
+hold on
+plot(ttrue,utrue(1,:))
+plot(ttrue,squeeze(ybar_FULL(2,:)))
+plot(ttrue, 2*sqrt(squeeze(Cyy_FULL(2,2,:))))
+plot(ttrue, -2*sqrt(squeeze(Cyy_FULL(2,2,:))))

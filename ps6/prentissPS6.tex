@@ -25,7 +25,7 @@
 \maketitle
 
 \section{1. Kalman Filter}
-See attached.
+\subsection{(a)}
 
 \section{2. Kalman Filter}
 
@@ -66,7 +66,76 @@ See figures \ref{2ca} and \ref{2cb}.
 
 \subsection{(d)}
 \subsection{(e)}
+From our samples of \texttt{ytrue} and \texttt{utrue} we can take the sample covariance of each and construct the variavce matrix. Since the errors are uncorrelated, only the diagonals have non-zero values.
+\[
+\begin{bmatrix} 0.1942 & 0 \\ 0 & 0.0008
+\end{bmatrix}
+\]
 \subsection{(f)}
-\subsection{(g)}
+\begin{figure}
+        \includegraphics[width=\textwidth]{2fa}
+        \caption{True, single-state system and simulated measurement error.}
+        \label{2fa}
+\end{figure}
+\begin{figure}
+        \includegraphics[width=\textwidth]{2fb}
+        \caption{True, single-state system and simulated measurement error.}
+        \label{2fb}
+\end{figure}
+{\scriptsize
+        \begin{minipage}{\linewidth}
+                \lstinputlisting[language=Matlab, caption={Propagation of a linear soil moisture model},
+                basicstyle=\ttfamily, label=lst1]{ps6f.m}
+        \end{minipage}
+}
 
+ans =
+
+   -0.1101
+
+
+ans =
+
+    0.2727
+
+
+ans =
+
+   -0.0028
+
+
+ans =
+
+    0.0506
+
+\subsection{(g)}
+{\scriptsize
+        \begin{minipage}{\linewidth}
+                \lstinputlisting[language=Matlab, caption={Propagation of a linear soil moisture model},
+                basicstyle=\ttfamily, label=lst1]{ps6g.m}
+        \end{minipage}
+}
+ans =
+
+    0.0026
+
+
+ans =
+
+    0.0326
+
+
+ans =
+
+   3.9219e-04
+
+
+ans =
+
+    0.0047
+\begin{figure}
+        \includegraphics[width=\textwidth]{2g}
+        \caption{True, single-state system and simulated measurement error.}
+        \label{2g}
+\end{figure}
 \end{document}
