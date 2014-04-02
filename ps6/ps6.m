@@ -1,41 +1,24 @@
 %PS6
-
-t_0 = 0;
-y_0 = 2;
-t_y = t_0:250;
-t_z = t_0:5:250;
-
 Prob2_single_state_truth_gen;
+t = 0:150;
+tz = z + 1
 hold on;
-plot(ytrue);
+plot(t, ytrue);
 scatter(tmeas,z);
 
 figure
-plot(utrue)
-hold on
+plot(t, utrue)
 
-Prob2_dual_state_truth_gen
-[y5,t5] = ...
-    Prob2_dual_state_lin_model( ...
-    y0true,alpha,utrue,Nsteps,dt,t_beg,w_variance);
-plot(y5(2,:))
-alpda(4) = 3;
-[y3,t3] = ...
-    Prob2_dual_state_lin_model( ...
-    y0true,alpha,utrue,Nsteps,dt,t_beg,w_variance);
-plot(y3(2,:))
-alpda(4) = 7;
-[y7,t7] = ...
-    Prob2_dual_state_lin_model( ...
-    y0true,alpha,utrue,Nsteps,dt,t_beg,w_variance);
-plot(y7(2,:))
-alpda(4) = 1;
-[y1,t1] = ...
-    Prob2_dual_state_lin_model( ...
-    y0true,alpha,utrue,Nsteps,dt,t_beg,w_variance);
-plot(y1(2,:))
-alpda(4) = 9;
-[y9,t9] = ...
-    Prob2_dual_state_lin_model( ...
-    y0true,alpha,utrue,Nsteps,dt,t_beg,w_variance);
-plot(y9(2,:))
+noise = zeros(1,150);
+for i = 1:150
+    noise(i) = noise(i) + normrnd(0,w_variance);
+end
+noise = [0 noise];
+
+j = 0;
+for rho = -1:0.01:1
+    j = j + 1;
+    u = utrue*rho + noise;
+    u = [0 u];
+    rohs(j,:) = [rho, fct_bias(utrue, u(1:end-1)), fct_RMSE(utrue, u(1:end-1))]
+end
