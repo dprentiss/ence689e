@@ -1,5 +1,5 @@
 %\documentclass[fleqn, letterpaper]{amsart}
-\documentclass[fleqn, letterpaper]{tufte-handout}
+\documentclass[letterpaper]{tufte-handout}
 \usepackage{times}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -25,6 +25,8 @@
 \newcommand{\vecv}{\mathbf{v}}
 \newcommand{\uu}{\mathbf{u}}
 \newcommand{\cyy}{\mathbf{C}_{yy}}
+\newcommand{\cyz}{\mathbf{C}_{yz}}
+\newcommand{\czz}{\mathbf{C}_{zz}}
 \newcommand{\cuu}{\mathbf{C}_{uu}}
 \newcommand{\cvv}{\mathbf{C}_{vv}}
 \newcommand{\cpp}{\mathbf{C}_{\psi\psi}}
@@ -41,13 +43,42 @@
 
 \section{1. Extended Kalman Filter}
 \section{2. Ensemble Kalman Gain}
-\begin{align*}\begin{bmatrix} y_1 \\ y_2 \end{bmatrix} 
-&= \begin{bmatrix} -2.03 & 1.28 & -2.38 & 0.40 & 1.69 & 3.73 & 3.13 & 1.64 & -0.72 & -3.39\\ -0.92 & 0.45 & -0.38 & 0.48 & -0.21 & 1.19 & 1.08 & 1.04 & -0.42 & -1.93 \end{bmatrix} \\\\
-z_p 
-&= \begin{bmatrix} -1.475 & 0.865 & -1.38 & 0.44 & 0.74 & 2.46 & 2.105 & 1.34 & -0.57 & -2.66 \end{bmatrix} \\\\
-\begin{bmatrix} \bar{y}_1 \\ \bar{y}_2 \end{bmatrix} 
-&=\begin{bmatrix} 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335\\ 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 \end{bmatrix} \\\\
-y^+
-&=\begin{bmatrix} 0.0673 & 1.51 & -0.479 & -0.314 & 0.756 & 0.721 & 0.595 & 0.591 & 0.488 & 1.07\\ -0.0816 & 0.542 & 0.38 & 0.195 & -0.583 & -0.013 & 0.0667 & 0.62 & 0.0628 & -0.147 \end{bmatrix}
+Given 
+\begin{align*}
+\y
+&= \begin{bmatrix} -2.03 & 1.28 & -2.38 & 0.40 & 1.69 & 3.73 & 3.13 & 1.64 & -0.72 & -3.39\\ -0.92 & 0.45 & -0.38 & 0.48 & -0.21 & 1.19 & 1.08 & 1.04 & -0.42 & -1.93 \end{bmatrix} \\
+\intertext{and} 
+\czz &= 0.5^2,\ z = 0.45
+\intertext{find}
+\y^+ &= \y + K\left[\z^{\text{act}} - \mathcal{M}(\y)\right].
+\end{align*}
+Since $K = \cyz(\czz+\cvv)^{-1}$, find the sample covariances
+\begin{align*}
+\cyz &\approx \frac{1}{N_r-1}\left[(\y - \bar{\y})(\z^\text{pred}-\bar{\z}^\text{pred})\T\right] = \begin{bmatrix}  3.95\\ 1.58 \end{bmatrix} \\
+\intertext{and}
+\czz &\approx \frac{1}{N_r-1}\left[(\z^\text{pred}-\bar{\z}^\text{pred})(\z^\text{pred}-\bar{\z}^\text{pred})\T\right] = 2.77 \\
+\end{align*}
+where
+\begin{align*}
+N_r &= 10,\\
+\bar{\y} &= \frac{1}{N_r}\sum_1^{N_r}y_j\ \mathbf{I}_{1\times 10}\\
+&=\begin{bmatrix} 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335 & 0.335\\ 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 & 0.038 \end{bmatrix}, \\
+\z^\text{pred} &= \mathcal{M}(\y) \\
+&= \begin{bmatrix} -1.475 & 0.865 & -1.38 & 0.44 & 0.74 & 2.46 & 2.105 & 1.34 & -0.57 & -2.66 \end{bmatrix}, \\
+\intertext{and}
+\bar{\z}^\text{pred} &= \frac{1}{N_r}\sum_1^{N_r}z^\text{pred}_j\ \mathbf{I}_{1\times 10}\\
+&=\begin{bmatrix}0.186 & 0.186 & 0.186 & 0.186 & 0.186 & 0.186 & 0.186 & 0.186 & 0.186 & 0.186\end{bmatrix}. \\
+\end{align*}
+Now assume the measurment error is Gaussian and zero-mean and let $z_j^\text{act} = z + v_j$ where $v_j \sim \mathcal{N}(0,0.5^2)$ or, in one particular realization,
+\begin{align*}
+\z^\text{act} &= \begin{bmatrix} 0.125 & 1.04 & 0.0708 & -0.105 & 0.0272 & 0.164 & 0.171 & 0.539 & 0.352 & 0.743 \end{bmatrix}
+\end{align*}
+Then
+\begin{align*}
+\y^+ &= \y + K\left[\z^{\text{act}} - \mathcal{M}(\y)\right] \\
+&=
+\begin{bmatrix}
+ 0.0673 & 1.51 & -0.479 & -0.314 & 0.756 & 0.721 & 0.595 & 0.591 & 0.488 & 1.07\\ -0.0816 & 0.542 & 0.38 & 0.195 & -0.583 & -0.013 & 0.0667 & 0.62 & 0.0628 & -0.147 
+\end{bmatrix}
 \end{align*}
 \end{document}
