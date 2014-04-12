@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[mathserif]{beamer}
 \usepackage{natbib}
 \usepackage{bibentry}
 \begin{document}
@@ -6,19 +6,78 @@
 \title{Comparing Adaptive Filtering Techniques \\ ENCE689E --- Reading Assignment}
 \author{David Prentiss \\ University of Maryland College Park}
 \subtitle{With a summary of \\ \bibentry{crow2008comparison}}
+
 \frame{\titlepage}
+
 \begin{frame}
-  \frametitle{Outline}
-  \begin{itemize}
-    \item Four adaptive filtering techniques or compared and evaluated on their ability to recover modeling noise and observational uncertainty.
-  \end{itemize}
+  \frametitle{Crow and Reichle (2008)}
+  \tableofcontents
 \end{frame}
+
+\section{Land Surface Modeling}
+
 \begin{frame}
-  \frametitle{Estimating Soil Moisture with WEB--SVAT}
+  \frametitle{Crow and Reichle (2008)}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Land Surface Modeling with WEB--SVAT}
   \begin{itemize}
     \item Water and Energy Balance Surface Vegetation Atmosphere Transfer
+    \item Point-based, two-state, mass balance (by volume)
+    \item Surface zone (5 cm) moisture flux, $\theta_{sz}$
+      \begin{equation}
+        \frac{d\theta_{sz}}{dt}=\frac{B_1}{d_{sz}}\left(P_g - E_S\right)-\frac{B_2}{\tau}\left(\theta_{sz}-\theta_{eq}\right)
+      \end{equation}
+    \item Root zone (50 cm), $\theta_{rz}$
+      \begin{equation}
+        \frac{d\theta_{rz}}{dt}=\frac{1}{d_{rz}}\left(P_g - T - E_S - D\right)
+      \end{equation}
+    \item Linear or non-linear?
   \end{itemize}
 \end{frame}
+
+\section{EnKFs and adaptive filters}
+
+\begin{frame}
+  \frametitle{Crow and Reichle (2008)}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{EnKFs and Adaptive Filters}
+  \begin{itemize}
+    \item Model error covariance matrix $\mathbf{Q}$ is assumed to capture all model error (forcing and parameters)
+    \item Correlation coefficient $\rho$ known
+    \item Ratio of state standard deviations $\alpha$ known
+      \begin{equation}
+        \mathbf{Q}=\begin{pmatrix}
+          Q & \alpha Q \rho \\
+          \alpha Q \rho & \alpha^2 Q
+        \end{pmatrix}
+      \end{equation}
+      where
+      \begin{equation}
+        \sqrt{Q} = \sigma_{q_1} = \alpha\sigma_{q_2}
+      \end{equation}
+  \end{itemize}
+\end{frame}
+
+\section{Synthetic twin experiment}
+
+\begin{frame}
+  \frametitle{Crow and Reichle (2008)}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\section{Four adaptive filters}
+
+\begin{frame}
+  \frametitle{Crow and Reichle (2008)}
+  \tableofcontents[currentsection]
+\end{frame}
+
 \bibliographystyle{plainnat}
 \bibliography{reading}
 \end{document}

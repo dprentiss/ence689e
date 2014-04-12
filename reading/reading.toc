@@ -1,1 +1,5 @@
 \beamer@endinputifotherversion {3.24pt}
+\beamer@sectionintoc {1}{Land Surface Modeling}{3}{0}{1}
+\beamer@sectionintoc {2}{EnKFs and adaptive filters}{5}{0}{2}
+\beamer@sectionintoc {3}{Synthetic twin experiment}{7}{0}{3}
+\beamer@sectionintoc {4}{Four adaptive filters}{8}{0}{4}
