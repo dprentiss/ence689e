@@ -10,28 +10,30 @@
 \headcommand {\beamer@framepages {3}{3}}
 \headcommand {\slideentry {1}{0}{4}{4/4}{}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\sectionentry {2}{EnKFs and adaptive filters}{5}{EnKFs and adaptive filters}{0}}
+\headcommand {\sectionentry {2}{EnKFs and Adaptive Filters}{5}{EnKFs and Adaptive Filters}{0}}
 \headcommand {\beamer@sectionpages {3}{4}}
 \headcommand {\beamer@subsectionpages {3}{4}}
 \headcommand {\slideentry {2}{0}{5}{5/5}{}{0}}
 \headcommand {\beamer@framepages {5}{5}}
 \headcommand {\slideentry {2}{0}{6}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\sectionentry {3}{Synthetic twin experiment}{7}{Synthetic twin experiment}{0}}
+\headcommand {\sectionentry {3}{Synthetic Twin Experiment}{7}{Synthetic Twin Experiment}{0}}
 \headcommand {\beamer@sectionpages {5}{6}}
 \headcommand {\beamer@subsectionpages {5}{6}}
 \headcommand {\slideentry {3}{0}{7}{7/7}{}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\sectionentry {4}{Four adaptive filters}{8}{Four adaptive filters}{0}}
-\headcommand {\beamer@sectionpages {7}{7}}
-\headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\slideentry {4}{0}{8}{8/8}{}{0}}
+\headcommand {\slideentry {3}{0}{8}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\sectionentry {5}{\translate {References}}{9}{\translate {References}}{0}}
-\headcommand {\beamer@sectionpages {8}{8}}
-\headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\beamer@partpages {1}{9}}
-\headcommand {\beamer@subsectionpages {8}{9}}
-\headcommand {\beamer@sectionpages {8}{9}}
-\headcommand {\beamer@documentpages {9}}
-\headcommand {\def \inserttotalframenumber {8}}
+\headcommand {\sectionentry {4}{Comparison of Four Adaptive Filters}{9}{Comparison of Four Adaptive Filters}{0}}
+\headcommand {\beamer@sectionpages {7}{8}}
+\headcommand {\beamer@subsectionpages {7}{8}}
+\headcommand {\slideentry {4}{0}{9}{9/9}{}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\sectionentry {5}{\translate {References}}{10}{\translate {References}}{0}}
+\headcommand {\beamer@sectionpages {9}{9}}
+\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\beamer@partpages {1}{10}}
+\headcommand {\beamer@subsectionpages {9}{10}}
+\headcommand {\beamer@sectionpages {9}{10}}
+\headcommand {\beamer@documentpages {10}}
+\headcommand {\def \inserttotalframenumber {9}}

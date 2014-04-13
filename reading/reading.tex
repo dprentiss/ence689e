@@ -22,9 +22,9 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Land Surface Modeling with WEB--SVAT}
+  \frametitle{\insertsection}
   \begin{itemize}
-    \item Water and Energy Balance Surface Vegetation Atmosphere Transfer
+    \item Water and Energy Balance Surface Vegetation Atmosphere Transfer (WEB--SVAT)
     \item Point-based, two-state, mass balance (by volume)
     \item Surface zone (5 cm) moisture flux, $\theta_{sz}$
       \begin{equation}
@@ -38,7 +38,7 @@
   \end{itemize}
 \end{frame}
 
-\section{EnKFs and adaptive filters}
+\section{EnKFs and Adaptive Filters}
 
 \begin{frame}
   \frametitle{Crow and Reichle (2008)}
@@ -46,8 +46,9 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{EnKFs and Adaptive Filters}
+  \frametitle{\insertsection}
   \begin{itemize}
+    \item The measurement error covariance $\mathbf{R}$ reduces to scalar $R$, since $H = (1, 0)$
     \item Model error covariance matrix $\mathbf{Q}$ is assumed to capture all model error (forcing and parameters)
     \item Correlation coefficient $\rho$ known
     \item Ratio of state standard deviations $\alpha$ known
@@ -59,19 +60,31 @@
       \end{equation}
       where
       \begin{equation}
-        \sqrt{Q} = \sigma_{q_1} = \alpha\sigma_{q_2}
+        \sqrt{Q} = \alpha\sigma_{q_1} = \sigma_{q_2}
       \end{equation}
   \end{itemize}
 \end{frame}
 
-\section{Synthetic twin experiment}
+\section{Synthetic Twin Experiment}
 
 \begin{frame}
   \frametitle{Crow and Reichle (2008)}
   \tableofcontents[currentsection]
 \end{frame}
 
-\section{Four adaptive filters}
+\begin{frame}
+  \frametitle{\insertsection}
+  \begin{itemize}
+    \item Truth: $\alpha = 0.30,\ \rho= 0.70$, and $\sqrt{Q_{true}} = 0.05$ vol/vol
+    \item 25-member EnKF
+    \item "Stratified grid of guesses" for the initial conditions ($\sqrt{Q_0}$ and $\sqrt{R_0}$)
+    \item Daily, synthetic soil moisture observations for 3000 days
+    \item Sampling period of 50 days where applicable
+    \item Filters compared on their ability to correct initial conditions and converge on the true variances
+  \end{itemize}
+\end{frame}
+
+\section{Comparison of Four Adaptive Filters}
 
 \begin{frame}
   \frametitle{Crow and Reichle (2008)}
