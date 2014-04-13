@@ -29,11 +29,13 @@
 \headcommand {\beamer@subsectionpages {7}{8}}
 \headcommand {\slideentry {4}{0}{9}{9/9}{}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\sectionentry {5}{\translate {References}}{10}{\translate {References}}{0}}
-\headcommand {\beamer@sectionpages {9}{9}}
-\headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\beamer@partpages {1}{10}}
-\headcommand {\beamer@subsectionpages {9}{10}}
+\headcommand {\slideentry {4}{0}{10}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\sectionentry {5}{\translate {References}}{11}{\translate {References}}{0}}
 \headcommand {\beamer@sectionpages {9}{10}}
-\headcommand {\beamer@documentpages {10}}
-\headcommand {\def \inserttotalframenumber {9}}
+\headcommand {\beamer@subsectionpages {9}{10}}
+\headcommand {\beamer@partpages {1}{11}}
+\headcommand {\beamer@subsectionpages {9}{11}}
+\headcommand {\beamer@sectionpages {9}{11}}
+\headcommand {\beamer@documentpages {11}}
+\headcommand {\def \inserttotalframenumber {10}}
