@@ -16,7 +16,7 @@ end
 % AF -- adult female
 % NB -- newborn
 % YF -- young female
-% YM -- young female
+% YM -- young male
 % NOTE: Adult males, if present, are for studding only and are not modeled
 herdEnsembleSize = 100;
 herdMinAF = 0;
@@ -36,7 +36,7 @@ h(1,:,:,:,:)=[hAF; hNB; hYF; hYM];
 
 % propagate herd forward model
 for i = 2:numSeasons % for every season
-
+    
 	% AFt+1 = AFt + YFt - sales rate(AFt) - death rate(AFt)
    	h(i,1,:) = h(i-1,1,:) + h(i-1,3,:)...
    	 - round(interp1(RFE,salesFemale,RFEs(i-1))*h(i-1,1,:))...
@@ -51,7 +51,7 @@ for i = 2:numSeasons % for every season
      - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,3,:));
  
 
-    % YMt+1 = NBt - YFt+1 - sales rate(YMt) - death rate(YMt)
+    % YMt+1 = YMt + NBt - YFt+1 - sales rate(YMt) - death rate(YMt)
     h(i,4,:) = h(i-1,4,:) + h(i,3,:)...
      - round(interp1(RFE,salesMale,RFEs(i-1))*h(i-1,4,:))...
      - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,4,:));
