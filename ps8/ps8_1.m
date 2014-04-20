@@ -10,7 +10,7 @@ rng(0);
 u = zeros(10,10);
 for i = 1:10
     for j = 1:10
-        u(i,j) = ubar(j) + normrnd(0, 5);
+        u(i,j) = ubar(j) + normrnd(0, 1);
     end
 end
 
