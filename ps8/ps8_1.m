@@ -20,3 +20,6 @@ hold on
 for i = 1:10
     plot(T,u(i,:))
 end
+title('Ensemble precipitation forcing')
+ylabel('mm water')
+xlabel('time step')
