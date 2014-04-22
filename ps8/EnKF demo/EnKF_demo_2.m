@@ -92,7 +92,7 @@ for ii = 1:length(z)+1
             Y0_inp = Y(:,index+1,k);
 
         % Call model (returns states over simulation period)
-        [Y_out,t_out] = nonlin_model(Y0_inp,alpha,uu,nsteps,dt,t_beg);
+        [Y_out,t_out] = nonlin_model_2(Y0_inp,alpha,uu,nsteps,dt,t_beg);
 
         % Compute predicted measurements
         z_out = H*Y_out;

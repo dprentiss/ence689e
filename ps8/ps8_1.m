@@ -58,7 +58,7 @@ hold on
 for i = 1:10
     plot(T,u(i,:))
 end
-axis([0 9 -10 240])
+axis([0 9 -10 100])
 title('Ensemble precipitation forcing')
 ylabel('mm water')
 xlabel('time step')
