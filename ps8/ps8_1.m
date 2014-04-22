@@ -48,7 +48,7 @@ xlabel('time step')
 %multiplicative, uncorrelated error
 for i = 1:10
     for j = 1:10
-        u(i,j) = ubar(j) * lognrnd(1, 0.1);
+        u(i,j) = ubar(j) * lognrnd(-0.005, 0.1);
     end
 end
 
@@ -58,15 +58,15 @@ hold on
 for i = 1:10
     plot(T,u(i,:))
 end
-axis([0 9 -10 200])
+axis([0 9 -10 240])
 title('Ensemble precipitation forcing')
 ylabel('mm water')
 xlabel('time step')
 
-%additive, correlated error
+%multiplicative, correlated error
 u = zeros(10,10);
 for i = 1:10
-    u(i,:) = ubar(:) * lognrnd(0, 0.1);
+    u(i,:) = ubar(:) * lognrnd(-0.005, 0.1);
 end
 
 figure
