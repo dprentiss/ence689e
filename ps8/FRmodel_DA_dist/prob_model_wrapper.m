@@ -15,8 +15,8 @@ rng(1);
 N_y = 4;  % # of states per pixel (y = [Ts, Td, W1, W2]^T at each pixel)
 
 % Size of domain
-N_lat = 1     % number or pixels in y-direction
-N_lon = 1     % number of pixels in x-direction
+N_lat = 2     % number or pixels in y-direction
+N_lon = 2     % number of pixels in x-direction
 
 % Total number of pixels
 N_pix = N_lat*N_lon
@@ -71,10 +71,8 @@ y0_bar = reshape(y0_bar,N_Y,1);
 % Assume states ICs are uncorrelated with each other (could change)
 % Construct covariance matrix
 % Covariance between states at a single pixel
-Cy0_pix = [1^2 0   0      0; ...
-           0   1^2 0      0; ...
-           0   0   0.05^2 0; ...
-           0   0   0      0.05^2];
+load ic3d Cy0_pix
+% Cy0_pix = [1^2 0 0 0; 0 1^2 0 0; 0 0 0.05^2 0; 0 0 0 0.05^2];
 % Construct for full state vector (i.e. over spatial domain)
 Cy0 = [];
 for i = 1:N_pix
@@ -173,7 +171,7 @@ if (run_flag==0)
     end
     Y_true = Y;
     Q_true = Q;
-    save true_output.mat N_y N_lat N_lon sim_Day_beg sim_Day_end alpha log_ubar_t C_ut y0_bar Cy0 t_true Y_true Q_true H z_true z_meas Cvv t_meas
+    save true_output.mat N_y N_lat N_lon sim_Day_beg sim_Day_end alpha log_ubar_t C_ut y0_bar Cy0 t_true Y_true Q_true H z_true z_meas Cvv t_meas imeas
 
 else
     % Save open-loop outputs

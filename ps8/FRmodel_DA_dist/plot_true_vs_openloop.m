@@ -116,7 +116,7 @@ if M>1  % Only plot maps if more than one pixel
             hold on;
         end
 
-        %pause(1)
+        pause
 
     end
 end
