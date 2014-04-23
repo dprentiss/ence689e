@@ -40,7 +40,6 @@ Nreps = 100;
 % Setup ICs (y: states; zz:predicted meas.)
 for k = 1:Nreps
     Y0(1:length(Ybar),k) = mvnrnd(Ybar,Cy0y0,1)';
-    Y0(3,k) = -abs(Y0(3,k));
     zz(1,1,k) = H*Y0(:,k);
 end
 Y(:,1,:) = Y0;
@@ -92,7 +91,7 @@ for ii = 1:length(z)+1
             Y0_inp = Y(:,index+1,k);
 
         % Call model (returns states over simulation period)
-        [Y_out,t_out] = nonlin_model_2(Y0_inp,alpha,uu,nsteps,dt,t_beg);
+        [Y_out,t_out] = nonlin_model(Y0_inp,alpha,uu,nsteps,dt,t_beg);
 
         % Compute predicted measurements
         z_out = H*Y_out;
@@ -169,7 +168,6 @@ for ii = 1:length(z)+1
         for k = 1:Nreps
             yup(:,k) = yrep(:,k)+kalm*(z(jmeas)+v(:,k)-zrep(:,k));
             Y(:,index+1,k) = yup(:,k);
-            Y(3,index+1,k) = -abs(Y(3,index+1,k));
             zz(:,index+1,k) = H*Y(:,index+1,k);
         end
         % Add extra time element at measurement (one before; one after

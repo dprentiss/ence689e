@@ -40,7 +40,6 @@ Nreps = 100;
 % Setup ICs (y: states; zz:predicted meas.)
 for k = 1:Nreps
     Y0(1:length(Ybar),k) = mvnrnd(Ybar,Cy0y0,1)';
-    Y0(3,k) = -abs(Y0(3,k));
     zz(1,1,k) = H*Y0(:,k);
 end
 Y(:,1,:) = Y0;
@@ -92,7 +91,7 @@ for ii = 1:length(z)+1
             Y0_inp = Y(:,index+1,k);
 
         % Call model (returns states over simulation period)
-        [Y_out,t_out] = nonlin_model_2(Y0_inp,alpha,uu,nsteps,dt,t_beg);
+        [Y_out,t_out] = nonlin_model(Y0_inp,alpha,uu,nsteps,dt,t_beg);
 
         % Compute predicted measurements
         z_out = H*Y_out;
@@ -145,79 +144,77 @@ for ii = 1:length(z)+1
     axis([0 Nsteps*dt -1 1])
     xlabel('t','FontSize',12); ylabel('f_2','FontSize',12);grid
     
-    pause
     
-%     % Update replicates
-%     if jmeas <=  length(z)
-%         % Grabs states/predicted measurements at meas. time
-%         ylast([1:3],[1:Nreps]) = Y([1:3],end,:);
-%         yrep = ylast;
-%         zlast([1:1],[1:Nreps]) = zz([1:1],end,:);
-%         zrep = zlast;
-%         % Compute sample mean vectors
-%         ymean = mean(yrep,2)*ones(1,Nreps);
-%         zmean = mean(zrep)*ones(1,Nreps);
-%         % Compute sample covariance matrices
-%         Cyz = ((yrep-ymean)*(zrep-zmean)')/(Nreps-1);
-%         Czz = ((zrep-zmean)*(zrep-zmean)')/(Nreps-1);
-%         % Compute Kalman gain
-%         kalm = Cyz/[Czz+Cvv];
-%         % Measurement error realizations
-%         v = mvnrnd(zeros(1,1),Cvv,Nreps)';
-%         % Update states
-%         index = size(Y,2);
-%         for k = 1:Nreps
-%             yup(:,k) = yrep(:,k)+kalm*(z(jmeas)+v(:,k)-zrep(:,k));
-%             Y(:,index+1,k) = yup(:,k);
-%             Y(3,index+1,k) = -abs(Y(3,index+1,k));
-%             zz(:,index+1,k) = H*Y(:,index+1,k);
-%         end
-%         % Add extra time element at measurement (one before; one after
-%         % update)
-%         t = [t t(end)];
-% 
-%         jmeas = jmeas+1;
-% 
-%     end
-% 
-%     if jmeas <= length(z)
-%     figure(5)
-%     clf
-%     subplot(3,1,1)
-%     plot(ttrue,ytrue(1,:),'k','LineWidth',2)
-%     hold on
-%     plot(t,squeeze(mean(Y(1,:,:),3)),'b','LineWidth',2)
-%     plot(t,squeeze(Y(1,:,:)),'c:','LineWidth',2)
-%     plot(ttrue,ytrue(1,:),'k','LineWidth',2)
-%     plot(t,squeeze(mean(Y(1,:,:),3)),'b','LineWidth',2)
-%     xlabel('t','FontSize',12); ylabel('y_1','FontSize',12);grid
-%     title('Update Step','FontWeight','bold')
-% 
-%     subplot(3,1,2)
-%     plot(ttrue,ytrue(2,:),'k','LineWidth',2)
-%     hold on
-%     plot(tmeas,z,'mo','LineWidth',2)
-%     plot(t,squeeze(mean(Y(2,:,:),3)),'b','LineWidth',2)
-%     plot(t,squeeze(Y(2,:,:)),'c:','LineWidth',2)
-%     legend('Truth','Measurements','Ensemble Mean','Replicates')
-%     plot(ttrue,ytrue(2,:),'k','LineWidth',2)
-%     plot(t,squeeze(mean(Y(2,:,:),3)),'b','LineWidth',2)
-%     plot(tmeas,z,'mo','LineWidth',2)
-%     xlabel('t','FontSize',12); ylabel('y_2','FontSize',12);grid
-% 
-%     subplot(3,1,3)
-%     plot([0 Nsteps*dt], [-2*0.1875 -2*0.1875],'k-','LineWidth',2)
-%     hold on
-%     plot(t,squeeze(mean(Y(3,:,:),3)),'b','LineWidth',2);hold on
-%     plot(t,squeeze(Y(3,:,:)),'c:','LineWidth',2)
-%     plot([0 Nsteps*dt], [-2*0.1875 -2*0.1875],'k-','LineWidth',2)
-%     plot(t,squeeze(mean(Y(3,:,:),3)),'b','LineWidth',2);hold on
-%     axis([0 Nsteps*dt -1 1])
-%     xlabel('t','FontSize',12); ylabel('f_2','FontSize',12);grid
-% 
-%     %pause
-% 
-%     end
+    
+    % Update replicates
+    if jmeas <=  length(z)
+        % Grabs states/predicted measurements at meas. time
+        ylast([1:3],[1:Nreps]) = Y([1:3],end,:);
+        yrep = ylast;
+        zlast([1:1],[1:Nreps]) = zz([1:1],end,:);
+        zrep = zlast;
+        % Compute sample mean vectors
+        ymean = mean(yrep,2)*ones(1,Nreps);
+        zmean = mean(zrep)*ones(1,Nreps);
+        % Compute sample covariance matrices
+        Cyz = ((yrep-ymean)*(zrep-zmean)')/(Nreps-1);
+        Czz = ((zrep-zmean)*(zrep-zmean)')/(Nreps-1);
+        % Compute Kalman gain
+        kalm = Cyz/[Czz+Cvv];
+        % Measurement error realizations
+        v = mvnrnd(zeros(1,1),Cvv,Nreps)';
+        % Update states
+        index = size(Y,2);
+        for k = 1:Nreps
+            yup(:,k) = yrep(:,k);
+            Y(:,index+1,k) = yup(:,k);
+            zz(:,index+1,k) = H*Y(:,index+1,k);
+        end
+        % Add extra time element at measurement (one before; one after
+        % update)
+        t = [t t(end)];
+
+        jmeas = jmeas+1;
+
+    end
+
+    if jmeas <= length(z)
+    figure(5)
+    clf
+    subplot(3,1,1)
+    plot(ttrue,ytrue(1,:),'k','LineWidth',2)
+    hold on
+    plot(t,squeeze(mean(Y(1,:,:),3)),'b','LineWidth',2)
+    plot(t,squeeze(Y(1,:,:)),'c:','LineWidth',2)
+    plot(ttrue,ytrue(1,:),'k','LineWidth',2)
+    plot(t,squeeze(mean(Y(1,:,:),3)),'b','LineWidth',2)
+    xlabel('t','FontSize',12); ylabel('y_1','FontSize',12);grid
+    title('Update Step','FontWeight','bold')
+
+    subplot(3,1,2)
+    plot(ttrue,ytrue(2,:),'k','LineWidth',2)
+    hold on
+    plot(tmeas,z,'mo','LineWidth',2)
+    plot(t,squeeze(mean(Y(2,:,:),3)),'b','LineWidth',2)
+    plot(t,squeeze(Y(2,:,:)),'c:','LineWidth',2)
+    legend('Truth','Measurements','Ensemble Mean','Replicates')
+    plot(ttrue,ytrue(2,:),'k','LineWidth',2)
+    plot(t,squeeze(mean(Y(2,:,:),3)),'b','LineWidth',2)
+    plot(tmeas,z,'mo','LineWidth',2)
+    xlabel('t','FontSize',12); ylabel('y_2','FontSize',12);grid
+
+    subplot(3,1,3)
+    plot([0 Nsteps*dt], [-2*0.1875 -2*0.1875],'k-','LineWidth',2)
+    hold on
+    plot(t,squeeze(mean(Y(3,:,:),3)),'b','LineWidth',2);hold on
+    plot(t,squeeze(Y(3,:,:)),'c:','LineWidth',2)
+    plot([0 Nsteps*dt], [-2*0.1875 -2*0.1875],'k-','LineWidth',2)
+    plot(t,squeeze(mean(Y(3,:,:),3)),'b','LineWidth',2);hold on
+    axis([0 Nsteps*dt -1 1])
+    xlabel('t','FontSize',12); ylabel('f_2','FontSize',12);grid
+ 
+
+    end
 
 end
 
