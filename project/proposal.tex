@@ -1,0 +1,59 @@
+%\documentclass[fleqn, letterpaper]{amsart}
+\documentclass[letterpaper]{tufte-handout}
+%\usepackage{times}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{epstopdf}
+\usepackage{bm}
+%\usepackage[left=1in]{geometry}
+
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\E}{\text{E}}
+\newcommand{\p}{p_{XY}}
+\newcommand{\T}{^\text{T}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\HH}{\mathbf{H}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\GG}{\mathbf{G}}
+\newcommand{\vech}{\mathbf{h}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\cyy}{\mathbf{C}_{yy}}
+\newcommand{\cyz}{\mathbf{C}_{yz}}
+\newcommand{\czz}{\mathbf{C}_{zz}}
+\newcommand{\cuu}{\mathbf{C}_{uu}}
+\newcommand{\cvv}{\mathbf{C}_{vv}}
+\newcommand{\cpp}{\mathbf{C}_{\psi\psi}}
+\renewcommand{\arraystretch}{1.5}
+\renewcommand{\vec}[1]{\mathrm{#1}}
+
+\title{Course Project Proposal --- ENCE689E Spring 2014}
+\author{David Prentiss}
+
+\begin{document}
+\maketitle
+
+The Famine Early Warning System Network (FEWSNET) project is a federally funded effort to monitor regional and global economies, food, and climate in order to provide advanced warning of humanitarian, food related disasters.
+Among the many FEWSNET tools is a model of pastoral herds. This model is an aid to the analysis of food security in regions where pastoral livelihoods are prevalent. While it sees wide adoption among food security analysts, its statistical properties are not well investigated. Furthermore it may be possible to enhance this model with adaptive filtering techniques.
+
+\section{Model Dynamics}
+The herd dynamics model is unproven and under--analyzed. In order to asses the efficacy of data assimilation techniques, it will first be useful to account for model behavior in general. To that end, the following items will be considered to judge the model's general dynamic characteristics and sensitivities. 
+\begin{itemize}
+  \item General tendencies vis--a--vis damped and un--damped dynamics. A variety of true forcings and initial conditions will be modeled to determine any thresholds between stable and unstable behavior.
+  \item Sensitivity to initial herd size. Initial results suggest herd size has little effect on overall herd dynamics. Randomly chosen herd sizes will be compared to confirm this.
+  \item Sensitivity to initial herd demographics. Randomly chosen proportions of demographic sub--groups of herds with a fixed size will be compared.
+  \end{itemize}
+\section{Data Assimilation}
+The model, in its current form, is linear and little is know about its error characteristics. As it stands, a standard Kalman Filter might be used for data assimilation under a Gaussian error assumption. However, given that biological systems are often nonlinear and that the forcings are base on precipitation amounts and timings, both the linear dynamic and Gaussian assumptions may, after future updates to the model, be inappropriate. Thus the skill of the Ensemble Kalman Filter in this context will be assessed against the following objectives:
+\begin{itemize}
+  \item Recovery of initial conditions (size and proportion). A synthetic twin experiment with a wide range of initial condition error will be conducted.
+  \item Sensitivity of skill to ensemble size. The synthetic experiment will be repeated for various ensemble sizes.
+  \item Sensitivity of skill to model error variance. The synthetic experiment will be repeated for multiple values of the model error variance.
+  \end{itemize}
+
+\end{document}
