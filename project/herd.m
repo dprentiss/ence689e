@@ -2,7 +2,7 @@ rng(0);
 load('shoatsRFE.mat')
 
 % create seasons of effective rainfall by random walk
-numSeasons = 20;
+numSeasons = 40;
 RFEs = zeros(1,numSeasons);
 RFEs(1) = 1;
 m = .8;
@@ -32,7 +32,6 @@ for i = 2:numSeasons % for every seasons
      - round(interp1(RFE,mortImm,RFEs(i-1))*h(i-1,2,:))))...
      - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,3,:));
  
-
     % YMt+1 = YMt + NBt - YFt+1 - sales rate(YMt) - death rate(YMt)
     h(i,4,:) = h(i-1,4,:) + h(i,3,:)...
      - round(interp1(RFE,salesMale,RFEs(i-1))*h(i-1,4,:))...
@@ -58,8 +57,12 @@ plot(squeeze(hratio(:,2,:)))
 plot(squeeze(hratio(:,3,:)))
 plot(squeeze(hratio(:,4,:)))
 
-
-
+% generate synthetic measurements
+measStep = 4;
+for i = 0:measStep:(numSeasons - mod(numSeasons, measStep))
+    %t_meas(i) = i*measStep;
+    %h_meas(i) = h(i);
+end
 
 % initialize herd ensemble with uniformly distibuted,
 % uncorrelated herd demographic groups
@@ -85,27 +88,41 @@ hYM = randi([herdMinYM herdMaxYM], 1, herdEnsembleSize);
 h = zeros(numSeasons,4,herdEnsembleSize);
 h(1,:,:,:,:)=[hAF; hNB; hYF; hYM];
 
+m = 1;
+v = 0.001;
+mu = log((m^2)/sqrt(v+m^2));
+sigma = sqrt(log(v/(m^2)+1));
+
 for i = 2:numSeasons % for every seasons
     
 	% AFt+1 = AFt + YFt - sales rate(AFt) - death rate(AFt)
    	h(i,1,:) = h(i-1,1,:) + h(i-1,3,:)...
    	 - round(interp1(RFE,salesFemale,RFEs(i-1))*h(i-1,1,:))...
      - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,1,:));
+ 
+    h(i,1,:) = round(squeeze(h(i,1,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
 
     % NBt+1 = conception rate(AFt)
     h(i,2,:) = round(interp1(RFE,conceptions,RFEs(i-1))*h(i-1,1,:));
+    
+    h(i,2,:) = round(squeeze(h(i,2,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
     
     % YFt+1 = 0.5*(NBt - mortImm(NBt)) - death rate(YFt)
     h(i,3,:) = round(0.5*(h(i-1,2,:)...
      - round(interp1(RFE,mortImm,RFEs(i-1))*h(i-1,2,:))))...
      - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,3,:));
- 
+    
+    h(i,3,:) = round(squeeze(h(i,3,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
 
     % YMt+1 = YMt + NBt - YFt+1 - sales rate(YMt) - death rate(YMt)
     h(i,4,:) = h(i-1,4,:) + h(i,3,:)...
      - round(interp1(RFE,salesMale,RFEs(i-1))*h(i-1,4,:))...
      - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,4,:));
+ 
+    h(i,4,:) = round(squeeze(h(i,4,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
+ 
 end
+
 herdSize = sum(h,2);
 figure;
 hold on;
