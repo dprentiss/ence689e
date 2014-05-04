@@ -229,7 +229,7 @@ for i = 2:numSeasons % for every seasons
         K = Cyz/(Czz + Czz);
         
         zact = round(zNB(i/measStep) * lognrnd(zmu, zsigma, herdEnsembleSize, 1));
-        y(i,:,:) = K*(zact-zp)';
+        %y(i,:,:) = y(i,:,:) + K*(zact-zp)';
     end
 end
 
