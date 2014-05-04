@@ -1,7 +1,8 @@
+clear all
 rng(0);
 load('shoatsRFE.mat')
 
-% create seasons of effective rainfall by random walk
+% create seasons of effective rainfall forcing
 numSeasons = 40;
 RFEs = zeros(1,numSeasons);
 RFEs(1) = 1;
@@ -15,29 +16,32 @@ end
 
 % generate truth
 herdEnsembleSize = 1;
-h = zeros(numSeasons,4,herdEnsembleSize);
-h(1,:,:,:,:) = [50; 50; 50; 50];
+y = zeros(numSeasons,4,herdEnsembleSize);
+y(1,:,:,:,:) = [50; 50; 50; 50];
 for i = 2:numSeasons % for every seasons
     
 	% AFt+1 = AFt + YFt - sales rate(AFt) - death rate(AFt)
-   	h(i,1,:) = h(i-1,1,:) + h(i-1,3,:)...
-   	 - round(interp1(RFE,salesFemale,RFEs(i-1))*h(i-1,1,:))...
-     - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,1,:));
+   	y(i,1,:) = y(i-1,1,:) + y(i-1,3,:)...
+   	 - round(interp1(RFE,salesFemale,RFEs(i-1))*y(i-1,1,:))...
+     - round(interp1(RFE,mortMat,RFEs(i-1))*y(i-1,1,:));
 
     % NBt+1 = conception rate(AFt)
-    h(i,2,:) = round(interp1(RFE,conceptions,RFEs(i-1))*h(i-1,1,:));
+    y(i,2,:) = round(interp1(RFE,conceptions,RFEs(i-1))*y(i-1,1,:));
     
     % YFt+1 = 0.5*(NBt - mortImm(NBt)) - death rate(YFt)
-    h(i,3,:) = round(0.5*(h(i-1,2,:)...
-     - round(interp1(RFE,mortImm,RFEs(i-1))*h(i-1,2,:))))...
-     - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,3,:));
+    y(i,3,:) = round(0.5*(y(i-1,2,:)...
+     - round(interp1(RFE,mortImm,RFEs(i-1))*y(i-1,2,:))))...
+     - round(interp1(RFE,mortMat,RFEs(i-1))*y(i-1,3,:));
  
     % YMt+1 = YMt + NBt - YFt+1 - sales rate(YMt) - death rate(YMt)
-    h(i,4,:) = h(i-1,4,:) + h(i,3,:)...
-     - round(interp1(RFE,salesMale,RFEs(i-1))*h(i-1,4,:))...
-     - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,4,:));
+    y(i,4,:) = y(i-1,4,:) + y(i,3,:)...
+     - round(interp1(RFE,salesMale,RFEs(i-1))*y(i-1,4,:))...
+     - round(interp1(RFE,mortMat,RFEs(i-1))*y(i-1,4,:));
 end
-herdSize = sum(h,2);
+
+ytrue = y;
+
+herdSize = sum(y,2);
 figure;
 hold on;
 for i = 1:herdEnsembleSize
@@ -47,23 +51,38 @@ figure;
 plot(RFEs);
 figure;
 hold on;
-clear hratio;
-hratio(:,1,:) = h(:,1,:)./herdSize;
-hratio(:,2,:) = h(:,2,:)./herdSize;
-hratio(:,3,:) = h(:,3,:)./herdSize;
-hratio(:,4,:) = h(:,4,:)./herdSize;
-plot(squeeze(hratio(:,1,:)))
-plot(squeeze(hratio(:,2,:)))
-plot(squeeze(hratio(:,3,:)))
-plot(squeeze(hratio(:,4,:)))
+clear yratio;
+yratio(:,1,:) = y(:,1,:)./herdSize;
+yratio(:,2,:) = y(:,2,:)./herdSize;
+yratio(:,3,:) = y(:,3,:)./herdSize;
+yratio(:,4,:) = y(:,4,:)./herdSize;
+plot(squeeze(yratio(:,1,:)))
+plot(squeeze(yratio(:,2,:)))
+plot(squeeze(yratio(:,3,:)))
+plot(squeeze(yratio(:,4,:)))
 
-% generate synthetic measurements
+% generate synthetic measurements of newborns
+m = 1;
+v = 0.1;
+mu = log((m^2)/sqrt(v+m^2));
+sigma = sqrt(log(v/(m^2)+1));
 measStep = 4;
-for i = 0:measStep:(numSeasons - mod(numSeasons, measStep))
-    %t_meas(i) = i*measStep;
-    %h_meas(i) = h(i);
+numMeas = (numSeasons - mod(numSeasons, measStep))/measStep;
+tmeas = zeros(numMeas);
+zNB = zeros(numMeas);
+for i = 1:numMeas
+    tmeas(i) = i*measStep;
+    zNB(i) = round(ytrue(tmeas(i),2,1) * lognrnd(mu, sigma));
 end
 
+% plot truth with measurements
+figure
+subplot(4,1,1), plot(ytrue(:,1))
+subplot(4,1,2), plot(ytrue(:,2))
+hold on
+subplot(4,1,2), plot(tmeas, zNB, 'o')
+subplot(4,1,3), plot(ytrue(:,3))
+subplot(4,1,4), plot(ytrue(:,4))
 % initialize herd ensemble with uniformly distibuted,
 % uncorrelated herd demographic groups
 % AF -- adult female
@@ -80,13 +99,13 @@ herdMinYF = 0;
 herdMaxYF = 100;
 herdMinYM = 0;
 herdMaxYM = 100;
-hAF = randi([herdMinAF herdMaxAF], 1, herdEnsembleSize);
-hNB = randi([herdMinNB herdMaxNB], 1, herdEnsembleSize);
-hYF = randi([herdMinYF herdMaxYF], 1, herdEnsembleSize);
-hYM = randi([herdMinYM herdMaxYM], 1, herdEnsembleSize);
+yAF = randi([herdMinAF herdMaxAF], 1, herdEnsembleSize);
+yNB = randi([herdMinNB herdMaxNB], 1, herdEnsembleSize);
+yYF = randi([herdMinYF herdMaxYF], 1, herdEnsembleSize);
+yYM = randi([herdMinYM herdMaxYM], 1, herdEnsembleSize);
 
-h = zeros(numSeasons,4,herdEnsembleSize);
-h(1,:,:,:,:)=[hAF; hNB; hYF; hYM];
+y = zeros(numSeasons,4,herdEnsembleSize);
+y(1,:,:,:,:)=[yAF; yNB; yYF; yYM];
 
 m = 1;
 v = 0.001;
@@ -96,34 +115,43 @@ sigma = sqrt(log(v/(m^2)+1));
 for i = 2:numSeasons % for every seasons
     
 	% AFt+1 = AFt + YFt - sales rate(AFt) - death rate(AFt)
-   	h(i,1,:) = h(i-1,1,:) + h(i-1,3,:)...
-   	 - round(interp1(RFE,salesFemale,RFEs(i-1))*h(i-1,1,:))...
-     - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,1,:));
+   	y(i,1,:) = y(i-1,1,:) + y(i-1,3,:)...
+   	 - round(interp1(RFE,salesFemale,RFEs(i-1))*y(i-1,1,:))...
+     - round(interp1(RFE,mortMat,RFEs(i-1))*y(i-1,1,:));
  
-    h(i,1,:) = round(squeeze(h(i,1,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
+    y(i,1,:) = round(squeeze(y(i,1,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
 
     % NBt+1 = conception rate(AFt)
-    h(i,2,:) = round(interp1(RFE,conceptions,RFEs(i-1))*h(i-1,1,:));
+    y(i,2,:) = round(interp1(RFE,conceptions,RFEs(i-1))*y(i-1,1,:));
     
-    h(i,2,:) = round(squeeze(h(i,2,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
+    y(i,2,:) = round(squeeze(y(i,2,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
     
     % YFt+1 = 0.5*(NBt - mortImm(NBt)) - death rate(YFt)
-    h(i,3,:) = round(0.5*(h(i-1,2,:)...
-     - round(interp1(RFE,mortImm,RFEs(i-1))*h(i-1,2,:))))...
-     - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,3,:));
+    y(i,3,:) = round(0.5*(y(i-1,2,:)...
+     - round(interp1(RFE,mortImm,RFEs(i-1))*y(i-1,2,:))))...
+     - round(interp1(RFE,mortMat,RFEs(i-1))*y(i-1,3,:));
     
-    h(i,3,:) = round(squeeze(h(i,3,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
+    y(i,3,:) = round(squeeze(y(i,3,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
 
     % YMt+1 = YMt + NBt - YFt+1 - sales rate(YMt) - death rate(YMt)
-    h(i,4,:) = h(i-1,4,:) + h(i,3,:)...
-     - round(interp1(RFE,salesMale,RFEs(i-1))*h(i-1,4,:))...
-     - round(interp1(RFE,mortMat,RFEs(i-1))*h(i-1,4,:));
+    y(i,4,:) = y(i-1,4,:) + y(i,3,:)...
+     - round(interp1(RFE,salesMale,RFEs(i-1))*y(i-1,4,:))...
+     - round(interp1(RFE,mortMat,RFEs(i-1))*y(i-1,4,:));
  
-    h(i,4,:) = round(squeeze(h(i,4,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
+    y(i,4,:) = round(squeeze(y(i,4,:)) .* lognrnd(mu, sigma, herdEnsembleSize, 1));
  
 end
 
-herdSize = sum(h,2);
+% Ensemble Kalman update
+
+% K = Cyz[Czz+Cvv]^(-1)
+
+% Cyz
+
+%ybar = repmat(mean(y(i,:,:),3)',1,100);
+%squeeze(y(i,:,:)) - ybar;
+
+herdSize = sum(y,2);
 figure;
 hold on;
 for i = 1:herdEnsembleSize
@@ -133,12 +161,12 @@ figure;
 plot(RFEs);
 figure;
 hold on;
-clear hratio;
-hratio(:,1,:) = h(:,1,:)./herdSize;
-hratio(:,2,:) = h(:,2,:)./herdSize;
-hratio(:,3,:) = h(:,3,:)./herdSize;
-hratio(:,4,:) = h(:,4,:)./herdSize;
-plot(squeeze(hratio(:,1,:)))
-plot(squeeze(hratio(:,2,:)))
-plot(squeeze(hratio(:,3,:)))
-plot(squeeze(hratio(:,4,:)))
+clear yratio;
+yratio(:,1,:) = y(:,1,:)./herdSize;
+yratio(:,2,:) = y(:,2,:)./herdSize;
+yratio(:,3,:) = y(:,3,:)./herdSize;
+yratio(:,4,:) = y(:,4,:)./herdSize;
+plot(squeeze(yratio(:,1,:)))
+plot(squeeze(yratio(:,2,:)))
+plot(squeeze(yratio(:,3,:)))
+plot(squeeze(yratio(:,4,:)))
