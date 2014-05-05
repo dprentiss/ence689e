@@ -3,10 +3,10 @@ rng(0);
 load('shoatsRFE.mat')
 
 % create seasons of effective rainfall forcing
-numSeasons = 40;
+numSeasons = 100;
 RFEs = zeros(1,numSeasons);
 RFEs(1) = 1;
-m = .7;
+m = .8;
 v = 0.1;
 mu = log((m^2)/sqrt(v+m^2));
 sigma = sqrt(log(v/(m^2)+1));
@@ -108,13 +108,13 @@ title('Young Males')
 % NOTE: Adult males, if present, are for studding only and are not modeled
 herdEnsembleSize = 100;
 herdMinAF = 0;
-herdMaxAF = 100;
+herdMaxAF = 200;
 herdMinNB = 0;
-herdMaxNB = 100;
+herdMaxNB = 200;
 herdMinYF = 0;
-herdMaxYF = 100;
+herdMaxYF = 200;
 herdMinYM = 0;
-herdMaxYM = 100;
+herdMaxYM = 200;
 yAF = randi([herdMinAF herdMaxAF], 1, herdEnsembleSize);
 yNB = randi([herdMinNB herdMaxNB], 1, herdEnsembleSize);
 yYF = randi([herdMinYF herdMaxYF], 1, herdEnsembleSize);
@@ -182,11 +182,6 @@ plot(squeeze(yratio(:,4,:)))
 
 %%%%% Ensemble Kalman Filter
 
-yAF = randi([herdMinAF herdMaxAF], 1, herdEnsembleSize);
-yNB = randi([herdMinNB herdMaxNB], 1, herdEnsembleSize);
-yYF = randi([herdMinYF herdMaxYF], 1, herdEnsembleSize);
-yYM = randi([herdMinYM herdMaxYM], 1, herdEnsembleSize);
-
 y = zeros(numSeasons,4,herdEnsembleSize);
 y(1,:,:,:,:)=[yAF; yNB; yYF; yYM];
 
@@ -219,7 +214,7 @@ for i = 2:numSeasons % for every seasons
     y(i,4,:) = round(squeeze(y(i,4,:)) .* lognrnd(ymu, ysigma, herdEnsembleSize, 1));
     
     % Kalman update
-    if find(tmeas == i)
+    if find(tmeas == i*10000)
         % K = Cyz[Czz+Cvv]^(-1)
         ybar = repmat(mean(y(i,:,:),3)',1,herdEnsembleSize);
         zp = squeeze(y(i,2,:));
