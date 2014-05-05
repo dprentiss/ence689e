@@ -72,7 +72,8 @@ plot(squeeze(yratio(:,4,:)))
 
 % generate synthetic measurements of newborns
 m = 1;
-v = 0.001;
+v = 0.01;
+Cvv = v;
 zmu = log((m^2)/sqrt(v+m^2));
 zsigma = sqrt(log(v/(m^2)+1));
 measStep = 4;
@@ -105,7 +106,7 @@ title('Young Males')
 % YF -- young female
 % YM -- young male
 % NOTE: Adult males, if present, are for studding only and are not modeled
-herdEnsembleSize = 10;
+herdEnsembleSize = 100;
 herdMinAF = 0;
 herdMaxAF = 100;
 herdMinNB = 0;
@@ -128,7 +129,7 @@ v = 0.001;
 ymu = log((m^2)/sqrt(v+m^2));
 ysigma = sqrt(log(v/(m^2)+1));
 
-for i = 2:numSeasons % for every seasons
+for i = 2:numSeasons % for every seasons 
     
 	% AFt+1 = AFt + YFt - sales rate(AFt) - death rate(AFt)
    	y(i,1,:) = y(i-1,1,:) + y(i-1,3,:)...
@@ -225,44 +226,47 @@ for i = 2:numSeasons % for every seasons
         zbar = repmat(mean(zp),herdEnsembleSize,1);
         Cyz = (squeeze(y(i,:,:)) - ybar) * (zp - zbar) / (herdEnsembleSize - 1);
         Czz = (zp - zbar)'*(zp - zbar) / (herdEnsembleSize - 1);
-        Cvv = zsigma^2;
-        K = Cyz/(Czz + Czz);
+        K = Cyz/(Czz + Cvv);
         
         zact = round(zNB(i/measStep) * lognrnd(zmu, zsigma, herdEnsembleSize, 1));
-        %y(i,:,:) = y(i,:,:) + K*(zact-zp)';
+        y(i,:,:) = round(y(i,:,:) + permute(K*(zact-zp)', [3 1 2]));
     end
 end
 
 % plot data assimilation
 figure(7)
 clf(7)
-subplot(4,1,1), plot(ytrue(:,1))
+subplot(4,1,1)
 hold on
 for i = 1:herdEnsembleSize
-    plot(y(:,1,i));
+    plot(y(:,1,i),'c:');
 end
+plot(ytrue(:,1))
 title('Adult Females')
 
-subplot(4,1,2), plot(ytrue(:,2))
+subplot(4,1,2)
 hold on
 for i = 1:herdEnsembleSize
-    plot(y(:,2,i));
+    plot(y(:,2,i),'c:');
 end
+plot(ytrue(:,2))
 title('Newborns and Measurements')
 subplot(4,1,2), plot(tmeas, zNB, 'o')
 
-subplot(4,1,3), plot(ytrue(:,3))
+subplot(4,1,3)
 title('Young Females')
 hold on
 for i = 1:herdEnsembleSize
-    plot(y(:,3,i));
+    plot(y(:,3,i),'c:');
 end
+plot(ytrue(:,3))
 
-subplot(4,1,4), plot(ytrue(:,4))
+subplot(4,1,4)
 hold on
 for i = 1:herdEnsembleSize
-    plot(y(:,4,i));
+    plot(y(:,4,i),'c:');
 end
+plot(ytrue(:,4))
 title('Young Males')
 
 
