@@ -41,7 +41,7 @@ end
 % generate truth
 herdEnsembleSize = 1;
 y = zeros(numSeasons,4,herdEnsembleSize);
-y(1,:,:,:,:) = [100; 100; 100; 100];
+y(1,:,:,:,:) = [50; 10; 10; 5];
 for i = 2:numSeasons % for every seasons
     
 	% AFt+1 = AFt + YFt - sales rate(AFt) - death rate(AFt)
@@ -232,13 +232,13 @@ title('Young Males')
 % initialize herd ensemble with uniformly distibuted,
 % uncorrelated herd demographic groups
 herdEnsembleSize = 100;
-herdMinAF = 100;
+herdMinAF = 0;
 herdMaxAF = 200;
-herdMinNB = 100;
+herdMinNB = 0;
 herdMaxNB = 200;
-herdMinYF = 100;
+herdMinYF = 0;
 herdMaxYF = 200;
-herdMinYM = 100;
+herdMinYM = 0;
 herdMaxYM = 200;
 yAF = randi([herdMinAF herdMaxAF], 1, herdEnsembleSize);
 yNB = randi([herdMinNB herdMaxNB], 1, herdEnsembleSize);
