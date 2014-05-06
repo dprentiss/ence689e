@@ -1,24 +1,34 @@
-subplot(3,2,1)
+%subplot(3,2,1)
+figure
 plot(RFE,conceptions)
 axis('tight')
-title('a) Conceptions/AF')
+title('Conceptions/AF')
+xlabel('RFE')
 
-subplot(3,2,2)
+%subplot(3,2,2)
+figure
 plot(RFE,salesMale)
 axis('tight')
-title('b) Sales/Male')
+title('Sales/Male')
+xlabel('RFE')
 
-subplot(3,2,3)
+%subplot(3,2,3)
+figure
 plot(RFE,salesFemale)
 axis('tight')
-title('c) Sales/Female')
+title('Sales/Female')
+xlabel('RFE')
 
-subplot(3,2,4)
+%subplot(3,2,4)
+figure
 plot(RFE,mortMat)
 axis('tight')
-title('d) Deaths/Mature Idv.')
+title('Deaths/Mature Idv.')
+xlabel('RFE')
 
-subplot(3,2,5)
+%subplot(3,2,5)
+figure
 plot(RFE,mortImm)
 axis('tight')
-title('e) Deaths/Immature Idv.')
+title('Deaths/Immature Idv.')
+xlabel('RFE')
