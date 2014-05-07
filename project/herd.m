@@ -123,12 +123,12 @@ title('Young Females')
 subplot(2,  2,4), plot(ytrue(:,4))
 title('Young Males')
 
-% % general dynamics
+% general dynamics
 % RFEg = ones(1,numSeasons);
 % for i = 0:0.1:1
 %     RFEg = ones(1,numSeasons);
 %     RFEg = RFEg * i;
-%     herdEnsembleSize = 100;
+%     herdEnsembleSize = 10;
 %     herdMinAF = 0;
 %     herdMaxAF = 200;
 %     herdMinNB = 0;
@@ -181,38 +181,38 @@ title('Young Males')
 %     figNum = figNum + 1;
 %     figure(figNum)
 %     clf(figNum)
-%     subplot(4,1,1)
+%     subplot(2,2,1)
 %     hold on
 %     for j = 1:herdEnsembleSize
 %         plot(y(:,1,j),'c:');
 %     end
-%     plot(ytrue(:,1))
-%     title(sprintf('Adult Females, RFE = %f',i))
+%     ymean = mean(y,3);
+%     plot(ymean(:,1))
+%     title(sprintf('Adult Females, RFE = %2.1f',i))
 %     
 %     subplot(2,2,2)
 %     hold on
 %     for j = 1:herdEnsembleSize
 %         plot(y(:,2,j),'c:');
 %     end
-%     plot(ytrue(:,2))
-%     title(sprintf('Newborns and Measurements, RFE = %f',i))
-%     subplot(2,2,2), plot(tmeas, zNB, 'o')
-%     
+%     plot(ymean(:,2))
+%     title(sprintf('Newborns, RFE = %2.1f',i))
+%         
 %     subplot(2,2,3)
-%     title(sprintf('Young Females, RFE = %f',i))
+%     title(sprintf('Young Females, RFE = %2.1f',i))
 %     hold on
 %     for j = 1:herdEnsembleSize
 %         plot(y(:,3,j),'c:');
 %     end
-%     plot(ytrue(:,3))
+%     plot(ymean(:,3))
 %     
 %     subplot(2,2,4)
 %     hold on
 %     for j = 1:herdEnsembleSize
 %         plot(y(:,4,j),'c:');
 %     end
-%     plot(ytrue(:,4))
-%     title(sprintf('Young Males, RFE = %f',i))
+%     plot(ymean(:,4))
+%     title(sprintf('Young Males, RFE = %2.1f',i))
 %     
 %     figNum = figNum + 1;
 %     figure(figNum)
@@ -231,7 +231,7 @@ title('Young Males')
 
 % initialize herd ensemble with uniformly distibuted,
 % uncorrelated herd demographic groups
-herdEnsembleSize = 10;
+herdEnsembleSize = 100;
 herdMinAF = 0;
 herdMaxAF = 200;
 herdMinNB = 0;

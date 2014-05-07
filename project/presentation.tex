@@ -22,6 +22,16 @@
 \end{frame}
 
 \begin{frame}
+\frametitle{\insertsection}
+\begin{itemize}
+\item \emph{Food security} is a measure of food \emph{availability} and \emph{access}.
+\item To be food secure, someone must \emph{produce} food and one must be able to \emph{aquire} and \emph{use} it.
+\item Food security monitoring agencies often focus on the health of \emph{regional livelihoods} to assess regional food security.
+\item A \emph{herd dynamics model} is a component of food security analysis for \emph{pastoral} livelihoods.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
 \begin{figure}
 \begin{center}
 \frametitle{\insertsection}
@@ -56,55 +66,64 @@ Photo Credit: Kelley Lynch
 \item sales,
 \item and mortality.
 \end{itemize}
+Rainfall estimates are indexed by quantity and timing.
 \end{itemize}
 \end{center}
 \end{frame}
 
+\subsection{Forcing Relationships}
 \begin{frame}
 \begin{center}
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 \includegraphics[width=0.9\textwidth]{conceptions}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \begin{center}
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 \includegraphics[width=0.9\textwidth]{salefem}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \begin{center}
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 \includegraphics[width=0.9\textwidth]{salemale}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \begin{center}
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 \includegraphics[width=0.9\textwidth]{mortMat}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \begin{center}
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 \includegraphics[width=0.9\textwidth]{mortImm}
 \end{center}
 \end{frame}
 
+\subsection{Formulation and Error}
 \begin{frame}
 \begin{center}
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 \begin{align}
-  y_{\text{AF}}^{t+1} &= y_{\text{AF}}^t + y_{\text{YF}}^t - f_{\text{SF}}^ty_{\text{AF}}^t - f_{\text{MM}}^ty_{\text{AF}}^t \\
-  y_{\text{NB}}^{t+1} &= f_{\text{C}}^ty_{\text{AF}}^t \\
-  y_{\text{YF}}^{t+1} &= 0.5(y_{\text{NB}}^t - f_{\text{MI}}^ty_{\text{NB}}^t) - f_{\text{MM}}^ty_{\text{YF}}^t \\
-  y_{\text{YM}}^{t+1} &= y_{\text{YM}}^t + y_{\text{NB}}^t - y_{\text{YF}}^{t+1} - f_{\text{SM}}^ty_{\text{YM}}^t - f_{\text{MM}}^ty_{\text{YM}}^t
+  y_{\text{AF}}^{t+1} &= [y_{\text{AF}}^t + y_{\text{YF}}^t - f_{\text{SF}}^ty_{\text{AF}}^t - f_{\text{MM}}^ty_{\text{AF}}^t]w_{\text{AF}}\\
+  y_{\text{NB}}^{t+1} &= [f_{\text{C}}^ty_{\text{AF}}^t]w_{\text{NB}}\\
+  y_{\text{YF}}^{t+1} &= [0.5(y_{\text{NB}}^t - f_{\text{MI}}^ty_{\text{NB}}^t) - f_{\text{MM}}^ty_{\text{YF}}^t]w_{\text{YF}}\\
+  y_{\text{YM}}^{t+1} &= [y_{\text{YM}}^t + y_{\text{NB}}^t - y_{\text{YF}}^{t+1} - f_{\text{SM}}^ty_{\text{YM}}^t - f_{\text{MM}}^ty_{\text{YM}}^t]w_{\text{YM}}
 \end{align}
 \end{center}
+\begin{itemize}
+\item $y$ are model states.
+\item $f$ are rainfall dependent rates of change.
+\item $w$ are multiplicative model error.
+\item $w\sim\ln\mathcal{N}(\mu,\sigma)$, $\bar{w}=1$, $\sigma_w^2 = 0.001$.
+\end{itemize}
 \end{frame}
 
 \section{General Characteristics}
@@ -114,11 +133,31 @@ Photo Credit: Kelley Lynch
 \tableofcontents[currentsection]
 \end{frame}
 
+\begin{frame}
+\begin{center}
+\frametitle{\insertsection}
+\includegraphics[width=0.9\textwidth]{general0}
+\end{center}
+\end{frame}
 
 \begin{frame}
 \begin{center}
 \frametitle{\insertsection}
-\includegraphics[width=0.9\textwidth]{ratios}
+\includegraphics[width=0.9\textwidth]{general1}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\frametitle{\insertsection}
+\includegraphics[width=0.9\textwidth]{general10}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\frametitle{\insertsection}
+\includegraphics[width=0.9\textwidth]{relprop}
 \end{center}
 \end{frame}
 
@@ -129,16 +168,17 @@ Photo Credit: Kelley Lynch
 \tableofcontents[currentsection]
 \end{frame}
 
+\subsection{Synthetic Truth}
 \begin{frame}
 \begin{center}
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 \includegraphics[width=0.9\textwidth]{forcing}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \begin{center}
-\frametitle{Synthetic Truth}
+\frametitle{\insertsubsection}
 \includegraphics[width=1\textwidth]{truth}
 \end{center}
 \end{frame}
@@ -147,13 +187,25 @@ Photo Credit: Kelley Lynch
 
 \begin{frame}
 \begin{center}
-\frametitle{Incorrect Initial Conditions}
+\frametitle{\insertsubsection}
+\begin{itemize}
+  \item True initial conditions: $(50\ 10\ 10\ 5)^T$
+  \item Ensemble initial conditions: $y_0\sim\mathcal{U}(0,200)$, uncorrelated
+  \item 100--member ensemble initial mean: $(95\ 94\ 101\ 98)^T$
+\end{itemize}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \begin{center}
+\frametitle{Ensemble Kalman Filter}
+\includegraphics[width=1\textwidth]{initcov}
+\end{center}
+\end{frame}
+
+\begin{frame}
 \frametitle{Open Loop}
+\begin{center}
 \includegraphics[width=1\textwidth]{openloop}
 \end{center}
 \end{frame}
@@ -161,7 +213,23 @@ Photo Credit: Kelley Lynch
 \begin{frame}
 \begin{center}
 \frametitle{Ensemble Kalman Filter}
+t = 30
+\includegraphics[width=1\textwidth]{ol30cov}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\frametitle{Ensemble Kalman Filter}
 \includegraphics[width=1\textwidth]{filtered}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\frametitle{Ensemble Kalman Filter}
+t = 30
+\includegraphics[width=1\textwidth]{kf30cov}
 \end{center}
 \end{frame}
 
