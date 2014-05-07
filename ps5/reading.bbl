@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{crow}
+WT~Crow and RH~Reichle.
+\newblock Comparison of adaptive filtering techniques for land surface data
+  assimilation.
+\newblock {\em Water resources research}, 44(8), 2008.
+
+\bibitem{li}
+Bailing Li, Matthew Rodell, Benjamin~F Zaitchik, Rolf~H Reichle, Randal~D
+  Koster, and Tonie~M van Dam.
+\newblock Assimilation of grace terrestrial water storage into a land surface
+  model: Evaluation and potential value for drought monitoring in western and
+  central europe.
+\newblock {\em Journal of Hydrology}, 446:103--115, 2012.
+
+\bibitem{zhou2008ensemble}
+Yuhua Zhou, Dennis McLaughlin, Dara Entekhabi, and Gene-Hua~Crystal Ng.
+\newblock An ensemble multiscale filter for large nonlinear data assimilation
+  problems.
+\newblock {\em Monthly Weather Review}, 136(2), 2008.
+
+\end{thebibliography}
