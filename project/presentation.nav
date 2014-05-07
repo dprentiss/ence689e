@@ -74,8 +74,11 @@
 \headcommand {\beamer@subsectionentry {0}{4}{3}{29}{Ensemble Size}}\headcommand {\beamer@subsectionpages {22}{28}}
 \headcommand {\slideentry {4}{3}{1}{29/29}{Ensemble Size}{0}}
 \headcommand {\beamer@framepages {29}{29}}
-\headcommand {\beamer@partpages {1}{29}}
-\headcommand {\beamer@subsectionpages {30}{29}}
-\headcommand {\beamer@sectionpages {19}{29}}
-\headcommand {\beamer@documentpages {29}}
-\headcommand {\def \inserttotalframenumber {29}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{30}{Model Error Variance}}\headcommand {\beamer@subsectionpages {29}{29}}
+\headcommand {\slideentry {4}{4}{1}{30/30}{Model Error Variance}{0}}
+\headcommand {\beamer@framepages {30}{30}}
+\headcommand {\beamer@partpages {1}{30}}
+\headcommand {\beamer@subsectionpages {30}{30}}
+\headcommand {\beamer@sectionpages {19}{30}}
+\headcommand {\beamer@documentpages {30}}
+\headcommand {\def \inserttotalframenumber {30}}

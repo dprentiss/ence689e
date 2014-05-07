@@ -66,7 +66,7 @@ Photo Credit: Kelley Lynch
 \item sales,
 \item and mortality.
 \end{itemize}
-Rainfall estimates are indexed by quantity and timing.
+\item Rainfall estimates are indexed by quantity and timing.
 \end{itemize}
 \end{center}
 \end{frame}
@@ -123,6 +123,8 @@ Rainfall estimates are indexed by quantity and timing.
 \item $f$ are rainfall dependent rates of change.
 \item $w$ are multiplicative model error.
 \item $w\sim\ln\mathcal{N}(\mu,\sigma)$, $\bar{w}=1$, $\sigma_w^2 = 0.001$.
+\item Multiplicative, lognormal error avoids negative values.
+\item It also means we cannot use the KF.
 \end{itemize}
 \end{frame}
 
@@ -192,13 +194,16 @@ Rainfall estimates are indexed by quantity and timing.
   \item True initial conditions: $(50\ 10\ 10\ 5)^T$
   \item Ensemble initial conditions: $y_0\sim\mathcal{U}(0,200)$, uncorrelated
   \item 100--member ensemble initial mean: $(95\ 94\ 101\ 98)^T$
+  \item 100--member ensemble initial covariance:
+
+  $\left(\begin{array}{cccc} 3345.0 & -515.0 & 220.6 & -144.6\\ -515.0 & 2995.0 & -665.7 & -53.02\\ 220.6 & -665.7 & 3431.0 & 72.85\\ -144.6 & -53.02 & 72.85 & 3061.0 \end{array}\right)$
 \end{itemize}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \begin{center}
-\frametitle{Ensemble Kalman Filter}
+\frametitle{\insertsubsection}
 \includegraphics[width=1\textwidth]{initcov}
 \end{center}
 \end{frame}
@@ -266,6 +271,21 @@ RMSE & 36.3 & 31.1 & 31.7
 \end{frame}
 
 \subsection{Model Error Variance}
+
+\begin{frame}
+\begin{center}
+\frametitle{Ensemble Kalman Filter}
+\begin{table}
+\begin{tabular}{rrrr}
+Model Error Variance & 0.001 & 0.01 & 0.1 \\
+\hline
+Bias & 6.5 & 7.2 & 9.7\\
+RMSE & 31.1 & 30.9 & 40.7
+\end{tabular}
+\caption{Skill for various model error variances}
+\end{table}
+\end{center}
+\end{frame}
 
 %\bibliographystyle{plainnat}
 %\bibliography{project}

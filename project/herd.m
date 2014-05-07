@@ -8,11 +8,9 @@ rng(0);
 load('shoatsRFE.mat')
 figNum = 0;
 
-mortRate = 0.001;
-
 % Model error
 m = 1;
-v = 0.001;
+v = 0.1;
 ymu = log((m^2)/sqrt(v+m^2));
 ysigma = sqrt(log(v/(m^2)+1));
 
