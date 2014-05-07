@@ -1,3 +1,7 @@
-\beamer@endinputifotherversion {3.24pt}
-\beamer@sectionintoc {1}{Land Surface Modeling}{3}{0}{1}
-\beamer@sectionintoc {2}{EnKFs and Adaptive Filters}{6}{0}{2}
+\beamer@endinputifotherversion {3.27pt}
+\beamer@sectionintoc {1}{Food Security and Pastoral Livelihoods}{3}{0}{1}
+\beamer@sectionintoc {2}{Herd Dynamics Model}{5}{0}{2}
+\beamer@sectionintoc {3}{General Characteristics}{13}{0}{3}
+\beamer@sectionintoc {4}{Data Assimilation}{15}{0}{4}
+\beamer@subsectionintoc {4}{1}{Initial Conditions}{18}{0}{4}
+\beamer@subsectionintoc {4}{2}{Ensemble Size}{22}{0}{4}

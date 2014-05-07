@@ -112,15 +112,15 @@ end
 figNum = figNum + 1;
 figure(figNum)
 clf(figNum)
-subplot(4,1,1), plot(ytrue(:,1))
+subplot(2,2,1), plot(ytrue(:,1))
 title('Adult Females')
-subplot(4,1,2), plot(ytrue(:,2))
+subplot(2,2,2), plot(ytrue(:,2))
 title('Newborns and Measurements')
 hold on
-subplot(4,1,2), plot(tmeas, zNB, 'o')
-subplot(4,1,3), plot(ytrue(:,3))
+subplot(2,2,2), plot(tmeas, zNB, 'o')
+subplot(2,2,3), plot(ytrue(:,3))
 title('Young Females')
-subplot(4,1,4), plot(ytrue(:,4))
+subplot(2,  2,4), plot(ytrue(:,4))
 title('Young Males')
 
 % % general dynamics
@@ -189,16 +189,16 @@ title('Young Males')
 %     plot(ytrue(:,1))
 %     title(sprintf('Adult Females, RFE = %f',i))
 %     
-%     subplot(4,1,2)
+%     subplot(2,2,2)
 %     hold on
 %     for j = 1:herdEnsembleSize
 %         plot(y(:,2,j),'c:');
 %     end
 %     plot(ytrue(:,2))
 %     title(sprintf('Newborns and Measurements, RFE = %f',i))
-%     subplot(4,1,2), plot(tmeas, zNB, 'o')
+%     subplot(2,2,2), plot(tmeas, zNB, 'o')
 %     
-%     subplot(4,1,3)
+%     subplot(2,2,3)
 %     title(sprintf('Young Females, RFE = %f',i))
 %     hold on
 %     for j = 1:herdEnsembleSize
@@ -206,7 +206,7 @@ title('Young Males')
 %     end
 %     plot(ytrue(:,3))
 %     
-%     subplot(4,1,4)
+%     subplot(2,2,4)
 %     hold on
 %     for j = 1:herdEnsembleSize
 %         plot(y(:,4,j),'c:');
@@ -231,7 +231,7 @@ title('Young Males')
 
 % initialize herd ensemble with uniformly distibuted,
 % uncorrelated herd demographic groups
-herdEnsembleSize = 100;
+herdEnsembleSize = 10;
 herdMinAF = 0;
 herdMaxAF = 200;
 herdMinNB = 0;
@@ -285,7 +285,7 @@ herdSize = sum(y,2);
 figNum = figNum + 1;
 figure(figNum)
 clf(figNum)
-subplot(4,1,1)
+subplot(2,2,1)
 hold on
 for i = 1:herdEnsembleSize
     plot(y(:,1,i),'c:')
@@ -293,8 +293,9 @@ end
 plot(ytrue(:,1),'k-')
 plot(yOLmean(:,1))
 title('Adult Females')
+axis('tight')
 
-subplot(4,1,2)
+subplot(2,2,2)
 hold on
 for i = 1:herdEnsembleSize
     plot(y(:,2,i),'c:');
@@ -302,9 +303,10 @@ end
 plot(ytrue(:,2),'k-')
 plot(yOLmean(:,2))
 title('Newborns and Measurements')
-subplot(4,1,2), plot(tmeas, zNB, 'o')
+subplot(2,2,2), plot(tmeas, zNB, 'o')
+axis('tight')
 
-subplot(4,1,3)
+subplot(2,2,3)
 title('Young Females')
 hold on
 for i = 1:herdEnsembleSize
@@ -312,8 +314,9 @@ for i = 1:herdEnsembleSize
 end
 plot(yOLmean(:,3))
 plot(ytrue(:,3),'k-')
+axis('tight')
 
-subplot(4,1,4)
+subplot(2,2,4)
 hold on
 for i = 1:herdEnsembleSize
     plot(y(:,4,i),'c:');
@@ -321,6 +324,7 @@ end
 plot(ytrue(:,4),'k-')
 plot(yOLmean(:,4))
 title('Young Males')
+axis('tight')
 
 figNum = figNum + 1;
 figure(figNum)
@@ -391,7 +395,7 @@ herdSize = sum(y,2);
 figNum = figNum + 1;
 figure(figNum)
 clf(figNum)
-subplot(4,1,1)
+subplot(2,2,1)
 hold on
 for i = 1:herdEnsembleSize
     plot(y(:,1,i),'c:')
@@ -399,8 +403,9 @@ end
 plot(ytrue(:,1),'k-')
 plot(yKFmean(:,1))
 title('Adult Females')
+axis('tight')
 
-subplot(4,1,2)
+subplot(2,2,2)
 hold on
 for i = 1:herdEnsembleSize
     plot(y(:,2,i),'c:');
@@ -408,9 +413,10 @@ end
 plot(ytrue(:,2),'k-')
 plot(yKFmean(:,2))
 title('Newborns and Measurements')
-subplot(4,1,2), plot(tmeas, zNB, 'o')
+axis('tight')
+subplot(2,2,2), plot(tmeas, zNB, 'o')
 
-subplot(4,1,3)
+subplot(2,2,3)
 title('Young Females')
 hold on
 for i = 1:herdEnsembleSize
@@ -418,8 +424,9 @@ for i = 1:herdEnsembleSize
 end
 plot(yKFmean(:,3))
 plot(ytrue(:,3),'k-')
+axis('tight')
 
-subplot(4,1,4)
+subplot(2,2,4)
 hold on
 for i = 1:herdEnsembleSize
     plot(y(:,4,i),'c:');
@@ -427,6 +434,7 @@ end
 plot(ytrue(:,4),'k-')
 plot(yKFmean(:,4))
 title('Young Males')
+axis('tight')
 
 fct_bias(ytrue, yKFmean)
 fct_bias(ytrue, yOLmean)

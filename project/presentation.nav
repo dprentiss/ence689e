@@ -1,25 +1,64 @@
-\beamer@endinputifotherversion {3.24pt}
+\beamer@endinputifotherversion {3.27pt}
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
-\headcommand {\sectionentry {1}{Land Surface Modeling}{3}{Land Surface Modeling}{0}}
+\headcommand {\sectionentry {1}{Food Security and Pastoral Livelihoods}{3}{Food Security and Pastoral Livelihoods}{0}}
 \headcommand {\beamer@sectionpages {1}{2}}
 \headcommand {\beamer@subsectionpages {1}{2}}
 \headcommand {\slideentry {1}{0}{3}{3/3}{}{0}}
 \headcommand {\beamer@framepages {3}{3}}
 \headcommand {\slideentry {1}{0}{4}{4/4}{}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\slideentry {1}{0}{5}{5/5}{}{0}}
+\headcommand {\sectionentry {2}{Herd Dynamics Model}{5}{Herd Dynamics Model}{0}}
+\headcommand {\beamer@sectionpages {3}{4}}
+\headcommand {\beamer@subsectionpages {3}{4}}
+\headcommand {\slideentry {2}{0}{5}{5/5}{}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\sectionentry {2}{EnKFs and Adaptive Filters}{6}{EnKFs and Adaptive Filters}{0}}
-\headcommand {\beamer@sectionpages {3}{5}}
-\headcommand {\beamer@subsectionpages {3}{5}}
-\headcommand {\sectionentry {3}{\translate {References}}{6}{\translate {References}}{0}}
-\headcommand {\beamer@sectionpages {6}{5}}
-\headcommand {\beamer@subsectionpages {6}{5}}
-\headcommand {\beamer@partpages {1}{6}}
-\headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\beamer@sectionpages {6}{6}}
-\headcommand {\beamer@documentpages {6}}
-\headcommand {\def \inserttotalframenumber {5}}
+\headcommand {\slideentry {2}{0}{6}{6/6}{}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\slideentry {2}{0}{7}{7/7}{}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\slideentry {2}{0}{8}{8/8}{}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\slideentry {2}{0}{9}{9/9}{}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {2}{0}{10}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {2}{0}{11}{11/11}{}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\slideentry {2}{0}{12}{12/12}{}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\sectionentry {3}{General Characteristics}{13}{General Characteristics}{0}}
+\headcommand {\beamer@sectionpages {5}{12}}
+\headcommand {\beamer@subsectionpages {5}{12}}
+\headcommand {\slideentry {3}{0}{13}{13/13}{}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\slideentry {3}{0}{14}{14/14}{}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\sectionentry {4}{Data Assimilation}{15}{Data Assimilation}{0}}
+\headcommand {\beamer@sectionpages {13}{14}}
+\headcommand {\beamer@subsectionpages {13}{14}}
+\headcommand {\slideentry {4}{0}{15}{15/15}{}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {4}{0}{16}{16/16}{}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {4}{0}{17}{17/17}{}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{18}{Initial Conditions}}\headcommand {\beamer@subsectionpages {15}{17}}
+\headcommand {\slideentry {4}{1}{1}{18/18}{Initial Conditions}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\slideentry {4}{1}{2}{19/19}{Initial Conditions}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\slideentry {4}{1}{3}{20/20}{Initial Conditions}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\slideentry {4}{1}{4}{21/21}{Initial Conditions}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{22}{Ensemble Size}}\headcommand {\beamer@subsectionpages {18}{21}}
+\headcommand {\slideentry {4}{2}{1}{22/22}{Ensemble Size}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\beamer@partpages {1}{22}}
+\headcommand {\beamer@subsectionpages {23}{22}}
+\headcommand {\beamer@sectionpages {15}{22}}
+\headcommand {\beamer@documentpages {22}}
+\headcommand {\def \inserttotalframenumber {22}}
