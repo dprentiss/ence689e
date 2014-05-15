@@ -1,0 +1,11 @@
+\beamer@endinputifotherversion {3.32pt}
+\beamer@sectionintoc {1}{Food Security and Pastoral Livelihoods}{3}{0}{1}
+\beamer@sectionintoc {2}{Herd Dynamics Model}{6}{0}{2}
+\beamer@subsectionintoc {2}{1}{Forcing Relationships}{8}{0}{2}
+\beamer@subsectionintoc {2}{2}{Formulation and Error}{13}{0}{2}
+\beamer@sectionintoc {3}{General Characteristics}{14}{0}{3}
+\beamer@sectionintoc {4}{Data Assimilation}{19}{0}{4}
+\beamer@subsectionintoc {4}{1}{Synthetic Truth}{20}{0}{4}
+\beamer@subsectionintoc {4}{2}{Initial Conditions}{22}{0}{4}
+\beamer@subsectionintoc {4}{3}{Ensemble Size}{29}{0}{4}
+\beamer@subsectionintoc {4}{4}{Model Error Variance}{30}{0}{4}

@@ -10,7 +10,7 @@ figNum = 0;
 
 % Model error
 m = 1;
-v = 0.1;
+v = 0.001;
 ymu = log((m^2)/sqrt(v+m^2));
 ysigma = sqrt(log(v/(m^2)+1));
 
@@ -275,7 +275,8 @@ for i = 2:numSeasons % for every seasons
     y(i,4,:) = squeeze(y(i,4,:)) .* lognrnd(ymu, ysigma, herdEnsembleSize, 1);
  
 end
-
+figure
+plotmatrix(squeeze(y(30,:,:))')
 yOLmean = mean(y,3);
 
 % plot openloop
