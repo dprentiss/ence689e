@@ -81,10 +81,10 @@ Measurements of the system are taken for newborns (state two) only. The measurem
 The herd dynamics model is unproven and under--analyzed. In order to asses the efficacy of data assimilation techniques, it will first be useful to account for model behavior in general. 
 To that end, the following items are considered to judge the model's general dynamic characteristics and sensitivities. 
 
-\subsection{General tendencies vis--a--vis damped and un--damped dynamics}
+\subsection{General tendencies vis--a--vis damped and undamped dynamics}
 A variety of constant forcing values and initial conditions were modeled to determine any thresholds between stable and unstable behavior.
 See Figures \ref{general0}, \ref{rgeneral1}, and \ref{rgeneral10}.
-From the figures it may be seen that the model achieves some stability during the modeled 40--season period when rainfall is constant near \%10 of the regional average. For rainfall amounts less (more) than this, the model tends to zero (exponetial growth). In general we expect a drought to cause the herd to shrink. Furthermore, exponetial growth is expected of populations that do not experience resource shortages. However, stable behavior at the observed level suggests that the model overvalues rainfall and does not account for at least one other resource limitation. Otherwise, unchecked herd growth would occationally be experienced in the field. 
+From the figures it may be seen that the model achieves some stability during the modeled 40--season period when rainfall is constant near \%10 of the regional average. For rainfall amounts less (more) than this, the model tends to zero (exponential growth). In general we expect a drought to cause the herd to shrink. Furthermore, exponential growth is expected of populations that do not experience resource shortages. However, stable behavior at the observed level suggests that the model overvalues rainfall and does not account for at least one other resource limitation. Otherwise, unchecked herd growth would occasionally be experienced in the field. 
 \begin{figure}
 \includegraphics[width=0.9\textwidth]{general0}
 \caption{Ten-member ensemble with consecutive seasons of zero rainfall.}
@@ -102,17 +102,17 @@ From the figures it may be seen that the model achieves some stability during th
 \end{figure}
 
 \subsection{Sensitivity to initial herd size and initial herd demographics}
-Randomly chosen proportions of demographic sub--groups of herds with a fixed size were compared. As seen in Figure \ref{relprop}, the herd proportions quickly stabalize for time-invariant forcings. This result is expected given that for fixed forcings the rates of change are constant.
+Randomly chosen proportions of demographic sub--groups of herds with a fixed size were compared. As seen in Figure \ref{relprop}, the herd proportions quickly stabilize for time-invariant forcing. This result is expected given that for fixed forcings, the rates of change are constant.
 \begin{figure}
 \includegraphics[width=0.9\textwidth]{relprop}
-\caption{Relative Proportions of herd demographic--subgroups. For constant rainfall, herd proportions quickly stabalize.}
+\caption{Relative Proportions of herd demographic--subgroups. For constant rainfall, herd proportions quickly stabilize.}
 \label{relprop}
 \end{figure}
 
 \section{Data Assimilation}
 The model, in its current form, is linear and little is know about its error characteristics.
 As it stands, a different choice of error characteristics would allow the use of the  standard Kalman Filter for data assimilation under a Gaussian error assumption.
-However, given that biological systems are often nonlinear and that the forcings are base on precipitation amounts and timings, both the linear dynamic and Gaussian assumptions may, after future updates to the model, be inappropriate.  As such, the skill of the EnKF is analysed. 
+However, given that biological systems are often nonlinear and that the forcings are base on precipitation amounts and timings, both the linear dynamic and Gaussian assumptions may, after future updates to the model, be inappropriate.  As such, the skill of the EnKF is analyzed. 
 
 \subsection{Synthetic Truth}
 To test the skill of the EnKF, the following synthetic truth was generated. An initial heard size and proportion was assumed with
@@ -159,7 +159,7 @@ EnKF & 6.5 & 31.1
 \end{table}
 
 \subsection{Sensitivity of skill to ensemble size}
-The synthetic experiment was repeated for ensemble sizes of 10 and 1000. The comparison between the open loop and EnKF is tabultated in Table \ref{ensize}. The model showed constistant results across the range of ensemble sizes suggesting the model depends heavily on the measurements. This result is expected for a model with errer an order of magnitude higher than the measurement.
+The synthetic experiment was repeated for ensemble sizes of 10 and 1000. The comparison between the open loop and EnKF is tabulated in Table \ref{ensize}. The model showed consistent results across the range of ensemble sizes suggesting the model depends heavily on the measurements. This result is expected for a model with error an order of magnitude higher than the measurement.
 \begin{table}
 \begin{tabular}{rrrr}
 Ensemble members & 10 & 100 & 1000 \\
@@ -172,7 +172,7 @@ RMSE & 36.3 & 31.1 & 31.7
 \end{table}
 
 \subsection{Sensitivity of skill to model error variance}
-The synthetic experiment was repeated for multiple values of the model error variance. The results are tabultated in Table \ref{error}. The model performed slightly worse for higher values of model error, as expected.
+The synthetic experiment was repeated for multiple values of the model error variance. The results are tabulated in Table \ref{error}. The model performed slightly worse for higher values of model error, as expected.
 \begin{table}
 \begin{tabular}{rrrr}
 Model Error Variance & 0.001 & 0.01 & 0.1 \\
@@ -186,10 +186,10 @@ RMSE & 31.1 & 30.9 & 40.7
 
 \section{Conclutions}
 The herd model's general characteristics suggest that the model needs improvement.
-Specifically, growth of the heard during consistant, below average rainfall implies that resource constraints are not properly accouted for in the model's structure.
+Specifically, growth of the heard during consistent, below average rainfall implies that resource constraints are not properly accounted for in the model's structure.
 Further work should propose such a limit and incorporate it the model.
 
-Data assimilation with the EnKF shows initial promise. Collecting data for the second state should be feasible and modelers should expect significant skill improvements. Furthermore, it may be possible as further work, to augment the model and use the EnKF to estimate the parameters of the previously mentioned resource limit until further emperical work can improve the model.
+Data assimilation with the EnKF shows initial promise. Collecting data for the second state should be feasible and modelers should expect significant skill improvements. Furthermore, it may be possible as further work, to augment the model and use the EnKF to estimate the parameters of the previously mentioned resource limit until further empirical work can improve the model.
 
 %\begin{figure}
 %\includegraphics[width=1\textwidth]{rinitcov}
