@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{listings}
+%\usepackage{listings}
 \usepackage{epstopdf}
 \usepackage{bm}
 %\usepackage[left=1in]{geometry}
@@ -41,7 +41,9 @@
 \section{Project Summary}
 
 The Famine Early Warning System Network (FEWSNET) project is a federally funded effort to monitor regional and global economies, food, and climate in order to provide advanced warning of humanitarian, food related disasters.
-Among the many FEWSNET tools is a model of pastoral herds. This model is an aid to the analysis of food security in regions where pastoral livelihoods are prevalent. While it sees wide adoption among food security analysts, its statistical properties are not well investigated. Furthermore it may be possible to enhance this model with adaptive filtering techniques. This work investigates the model's general charachteristics and assess the skill of the Ensemble Kalman Filter for data assimilation in a synthetic twin experiment.
+Among the many FEWSNET tools is a model of pastoral herds. This model is an aid to the analysis of food security in regions where pastoral livelihoods are prevalent. While it sees wide adoption among food security analysts, its statistical properties are not well investigated.
+Furthermore it may be possible to enhance this model with adaptive filtering techniques.
+This work investigates the model's general charachteristics and assess the skill of the Ensemble Kalman Filter (EnKF) for data assimilation in a synthetic twin experiment.
 
 \section{Herd Dynamics Model}
 
@@ -55,66 +57,110 @@ y_{\text{NB}}^{t+1} &= [f_{\text{C}}^ty_{\text{AF}}^t]w_{\text{NB}}\\
 y_{\text{YF}}^{t+1} &= [0.5(y_{\text{NB}}^t - f_{\text{MI}}^ty_{\text{NB}}^t) - f_{\text{MM}}^ty_{\text{YF}}^t]w_{\text{YF}}\\
 y_{\text{YM}}^{t+1} &= [y_{\text{YM}}^t + y_{\text{NB}}^t - y_{\text{YF}}^{t+1} - f_{\text{SM}}^ty_{\text{YM}}^t - f_{\text{MM}}^ty_{\text{YM}}^t]w_{\text{YM}}
 \end{align}
-where $f_{\text{C}}^tf$, $f_{\text{SM}}^t$, $f_{\text{SF}}$, $f_{\text{MM}}$, and $f_{\text{MI}}$ are the rates of conception, male sales, female sales, mature mortality, and immature mortality respectively and
-$w_{\text{C}}^tf$, $w_{\text{SM}}^t$, $w_{\text{SF}}$, $w_{\text{MM}}$, and $w_{\text{MI}}$
-Step super--scipts and arguments have been omitted for clarity.
-\begin{itemize}
-\item $w$ are multiplicative model error.
-\item $w\sim\ln\mathcal{N}(\mu,\sigma)$, $\bar{w}=1$, $\sigma_w^2 = 0.001$.
-\item Multiplicative, lognormal error avoids negative values.
-\item It also means we cannot use the KF.
-\end{itemize}
-See figure \ref{rferels}.
+where $f_{\text{C}}^t$, $f_{\text{SM}}^t$, $f_{\text{SF}}$, $f_{\text{MM}}$, and $f_{\text{MI}}$ are the rates of conception, male sales, female sales, mature mortality, and immature mortality respectively and
+$w_{\text{C}}^t$, $w_{\text{SM}}^t$, $w_{\text{SF}}$, $w_{\text{MM}}$, and $w_{\text{MI}}$
+are multiplicative model error.
+The rate functions have been determined empirically and are illustrated in Figure \ref{rferels}.
+For model error $w$ the following properties are adopted:
+\[w\sim\ln\mathcal{N}(\mu,\sigma), \bar{w}=1, \sigma_w^2 = 0.001\]
+Multiplicative, lognormal error is chosen to avoid negative values.
+However, the choice means that data assimilation techniques that assume a Guassian distribution for random variables, such as the Kalman Filter, are excluded.
 \begin{figure}
 \includegraphics[width=1.0\textwidth]{refrel}
+\caption{Herd Dynamic Rates. For each relationship, the y--axis represents the fraction of the relevent demographic group subject to change due to rainfall. The x--axis represents the current--season fraction of the regional average rainfall. Note: the negative values present in the dataset are undefined in the current interpretation and, as such, are not used.}
 \label{rferels}
 \end{figure}
-\section{Model Dynamics}
-The herd dynamics model is unproven and under--analyzed. In order to asses the efficacy of data assimilation techniques, it will first be useful to account for model behavior in general. To that end, the following items will be considered to judge the model's general dynamic characteristics and sensitivities. 
-\begin{itemize}
-  \item General tendencies vis--a--vis damped and un--damped dynamics. A variety of true forcings and initial conditions will be modeled to determine any thresholds between stable and unstable behavior.
-  \item Sensitivity to initial herd size. Initial results suggest herd size has little effect on overall herd dynamics. Randomly chosen herd sizes will be compared to confirm this.
-  \item Sensitivity to initial herd demographics. Randomly chosen proportions of demographic sub--groups of herds with a fixed size will be compared.
-  \end{itemize}
-\section{Data Assimilation}
-The model, in its current form, is linear and little is know about its error characteristics. As it stands, a standard Kalman Filter might be used for data assimilation under a Gaussian error assumption. However, given that biological systems are often nonlinear and that the forcings are base on precipitation amounts and timings, both the linear dynamic and Gaussian assumptions may, after future updates to the model, be inappropriate. Thus the skill of the Ensemble Kalman Filter in this context will be assessed against the following objectives:
-\begin{itemize}
-  \item Recovery of initial conditions (size and proportion). A synthetic twin experiment with a wide range of initial condition error will be conducted.
-  \item Sensitivity of skill to ensemble size. The synthetic experiment will be repeated for various ensemble sizes.
-  \item Sensitivity of skill to model error variance. The synthetic experiment will be repeated for multiple values of the model error variance.
-  \end{itemize}
 
 \section{General Characteristics}
+The herd dynamics model is unproven and under--analyzed. In order to asses the efficacy of data assimilation techniques, it will first be useful to account for model behavior in general. 
+To that end, the following items are considered to judge the model's general dynamic characteristics and sensitivities. 
 
+\subsection{General tendencies vis--a--vis damped and un--damped dynamics}
+A variety of constant forcing values and initial conditions were modeled to determine any thresholds between stable and unstable behavior.
+See Figures \ref{general0}, \ref{rgeneral1}, and \ref{rgeneral10}.
 \begin{figure}
 \includegraphics[width=\textwidth]{general0}
+\label{general0}
+\caption{Ten-member ensemble with consecutive seasons of zero rainfall.}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.9\textwidth]{rgeneral1}
+\includegraphics[width=\textwidth]{rgeneral1}
+\label{rgeneral1}
+\caption{Ten-member ensemble with consecutive seasons of rainfall at \%10 of regional average.}
 \end{figure}
 \begin{figure}
-\includegraphics[width=0.9\textwidth]{rgeneral10}
+\includegraphics[width=\textwidth]{rgeneral10}
+\label{rgeneral10}
+\caption{Ten-member ensemble with consecutive seasons of rainfall at \%100 of regional average.}
 \end{figure}
+
+\subsection{Sensitivity to initial herd size and initial herd demographics}
+Randomly chosen proportions of demographic sub--groups of herds with a fixed size will be compared.
 \begin{figure}
 \includegraphics[width=0.9\textwidth]{relprop}
+\caption{Relative Proportions of herd demographic--subgroups. For constant rainfall, herd proportions quickly stabalize.}
 \end{figure}
+
 \section{Data Assimilation}
+The model, in its current form, is linear and little is know about its error characteristics.
+As it stands, a different choice of error characteristics would allow the use of the  standard Kalman Filter for data assimilation under a Gaussian error assumption.
+However, given that biological systems are often nonlinear and that the forcings are base on precipitation amounts and timings, both the linear dynamic and Gaussian assumptions may, after future updates to the model, be inappropriate.  As such, the skill of the EnKF is analysed. 
+
 \subsection{Synthetic Truth}
+To test the skill of the EnKF, the following synthetic truth was generated. An initial heard size and proportion was assumed with
+\[\vecy_0 = (50\ 10\ 10\ 5)^T\].
+Also, 40 seasons of synthetic forcing was generated. The generation heuristic and initial conditions were chosen to simulate progressivly worsening drought conditions. See Figure \ref{forcing}.
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.9\textwidth]{rforcing}
+\label{forcing}
+\caption{Synthetic Forcing Time Series.}
 \end{center}
 \end{figure}
-\subsection{Initial Conditions}
 
 \begin{itemize}
-\item True initial conditions: $(50\ 10\ 10\ 5)^T$
 \item Ensemble initial conditions: $y_0\sim\mathcal{U}(0,200)$, uncorrelated
 \item 100--member ensemble initial mean: $(95\ 94\ 101\ 98)^T$
 \item 100--member ensemble initial covariance:
-
-$\left(\begin{array}{cccc} 3345.0 & -515.0 & 220.6 & -144.6\\ -515.0 & 2995.0 & -665.7 & -53.02\\ 220.6 & -665.7 & 3431.0 & 72.85\\ -144.6 & -53.02 & 72.85 & 3061.0 \end{array}\right)$
 \end{itemize}
+$\left(\begin{array}{cccc} 3345.0 & -515.0 & 220.6 & -144.6\\ -515.0 & 2995.0 & -665.7 & -53.02\\ 220.6 & -665.7 & 3431.0 & 72.85\\ -144.6 & -53.02 & 72.85 & 3061.0 \end{array}\right)$
+
+\subsection{Recovery of initial conditions}
+ A synthetic twin experiment with a wide range of initial condition error will be conducted.
+\begin{table}
+\begin{tabular}{rrr}
+& Bias & RMSE \\
+\hline
+Open loop & 441.2 & 565.2 \\
+EnKF & 6.5 & 31.1
+\end{tabular}
+\caption{Skill of open loop vs. EnKF}
+\end{table}
+
+\subsection{Sensitivity of skill to ensemble size}
+The synthetic experiment will be repeated for various ensemble sizes.
+\begin{table}
+\begin{tabular}{rrrr}
+Ensemble members & 10 & 100 & 1000 \\
+\hline
+Bias & 10.5 & 6.5 & 6.5 \\
+RMSE & 36.3 & 31.1 & 31.7
+\end{tabular}
+\caption{Skill for various ensemble sizes}
+\end{table}
+
+\subsection{Sensitivity of skill to model error variance}
+The synthetic experiment will be repeated for multiple values of the model error variance.
+\begin{table}
+\begin{tabular}{rrrr}
+Model Error Variance & 0.001 & 0.01 & 0.1 \\
+\hline
+Bias & 6.5 & 7.2 & 9.7\\
+RMSE & 31.1 & 30.9 & 40.7
+\end{tabular}
+\caption{Skill for various model error variances}
+\end{table}
+
 
 \begin{figure}
 \includegraphics[width=1\textwidth]{rinitcov}
@@ -131,40 +177,7 @@ $\left(\begin{array}{cccc} 3345.0 & -515.0 & 220.6 & -144.6\\ -515.0 & 2995.0 & 
 \begin{figure}
 \includegraphics[width=1\textwidth]{rkf30cov}
 \end{figure}
-\begin{table}
-\begin{tabular}{rrr}
-& Bias & RMSE \\
-\hline
-Open loop & 441.2 & 565.2 \\
-EnKF & 6.5 & 31.1
-\end{tabular}
-\caption{Skill of open loop vs. EnKF}
-\end{table}
 
-\subsection{Ensemble Size}
-
-\begin{table}
-\begin{tabular}{rrrr}
-Ensemble members & 10 & 100 & 1000 \\
-\hline
-Bias & 10.5 & 6.5 & 6.5 \\
-RMSE & 36.3 & 31.1 & 31.7
-\end{tabular}
-\caption{Skill for various ensemble sizes}
-\end{table}
-
-\subsection{Model Error Variance}
-
-\begin{table}
-\begin{tabular}{rrrr}
-Model Error Variance & 0.001 & 0.01 & 0.1 \\
-\hline
-Bias & 6.5 & 7.2 & 9.7\\
-RMSE & 31.1 & 30.9 & 40.7
-\end{tabular}
-\caption{Skill for various model error variances}
-\end{table}
-
-%\bibliographystyle{plainnat}
-%\bibliography{project}
+\bibliographystyle{plainnat}
+\bibliography{project}
 \end{document}
