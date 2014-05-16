@@ -1,15 +1,17 @@
-\documentclass[fleqn, letterpaper]{amsart}
+\documentclass[fleqn, letterpaper]{article}
 %\documentclass[letterpaper]{tufte-handout}
 %\usepackage{times}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{multirow}
+%\usepackage{multirow}
 %\usepackage{listings}
 \usepackage{epstopdf}
-\usepackage{bm}
+%\usepackage{bm}
 %\usepackage[left=1in]{geometry}
+
+\numberwithin{figure}{section}
 
 \newcommand{\R}{\mathcal{R}}
 \newcommand{\E}{\text{E}}
@@ -58,7 +60,7 @@ y_{\text{YF}}^{t+1} &= [0.5(y_{\text{NB}}^t - f_{\text{MI}}^ty_{\text{NB}}^t) - 
 y_{\text{YM}}^{t+1} &= [y_{\text{YM}}^t + y_{\text{NB}}^t - y_{\text{YF}}^{t+1} - f_{\text{SM}}^ty_{\text{YM}}^t - f_{\text{MM}}^ty_{\text{YM}}^t]w_{\text{YM}}
 \end{align}
 where $f_{\text{C}}^t$, $f_{\text{SM}}^t$, $f_{\text{SF}}$, $f_{\text{MM}}$, and $f_{\text{MI}}$ are the rates of conception, male sales, female sales, mature mortality, and immature mortality respectively and
-$w_{\text{C}}^t$, $w_{\text{SM}}^t$, $w_{\text{SF}}$, $w_{\text{MM}}$, and $w_{\text{MI}}$
+$w_{\text{C}}$, $w_{\text{SM}}^t$, $w_{\text{SF}}$, $w_{\text{MM}}$, and $w_{\text{MI}}$
 are multiplicative model error.
 The rate functions have been determined empirically and are illustrated in Figure \ref{rferels}.
 
@@ -84,17 +86,17 @@ A variety of constant forcing values and initial conditions were modeled to dete
 See Figures \ref{general0}, \ref{rgeneral1}, and \ref{rgeneral10}.
 From the figures it may be seen that the model achieves some stability during the modeled 40--season period when rainfall is constant near \%10 of the regional average. For rainfall amounts less (more) than this, the model tends to zero (exponetial growth). In general we expect a drought to cause the herd to shrink. Furthermore, exponetial growth is expected of populations that do not experience resource shortages. However, stable behavior at the observed level suggests that the model overvalues rainfall and does not account for at least one other resource limitation. Otherwise, unchecked herd growth would occationally be experienced in the field. 
 \begin{figure}
-\includegraphics[width=\textwidth]{general0}
-\label{general0}
+\includegraphics[width=0.9\textwidth]{general0}
 \caption{Ten-member ensemble with consecutive seasons of zero rainfall.}
+\label{general0}
 \end{figure}
 \begin{figure}
-\includegraphics[width=\textwidth]{rgeneral1}
+\includegraphics[width=0.9\textwidth]{rgeneral1}
 \label{rgeneral1}
 \caption{Ten-member ensemble with consecutive seasons of rainfall at \%10 of regional average.}
 \end{figure}
 \begin{figure}
-\includegraphics[width=\textwidth]{rgeneral10}
+\includegraphics[width=0.9\textwidth]{rgeneral10}
 \label{rgeneral10}
 \caption{Ten-member ensemble with consecutive seasons of rainfall at \%100 of regional average.}
 \end{figure}
@@ -182,6 +184,12 @@ RMSE & 31.1 & 30.9 & 40.7
 \label{error}
 \end{table}
 
+\section{Conclutions}
+The herd model's general characteristics suggest that the model needs improvement.
+Specifically, growth of the heard during consistant, below average rainfall implies that resource constraints are not properly accouted for in the model's structure.
+Further work should propose such a limit and incorporate it the model.
+
+Data assimilation with the EnKF shows initial promise. Collecting data for the second state should be feasible and modelers should expect significant skill improvements. Furthermore, it may be possible as further work, to augment the model and use the EnKF to estimate the parameters of the previously mentioned resource limit until further emperical work can improve the model.
 
 %\begin{figure}
 %\includegraphics[width=1\textwidth]{rinitcov}
